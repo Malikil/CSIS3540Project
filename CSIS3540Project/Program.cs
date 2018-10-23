@@ -8,7 +8,8 @@ namespace CSIS3540Project
 {
     class Program
     {
-        static void Main(string[] args)
+        [STAThread]
+        static void Main()
         {
         }
     }
