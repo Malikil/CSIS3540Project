@@ -1,5 +1,5 @@
 Project proposal report  
-Eric Hagen, 
+Eric, Heitor, Roger, Kate
 ===
 ## Project Description
 ### Requirements/Deliverables:
