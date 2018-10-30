@@ -21,7 +21,8 @@ namespace CSIS3540Project
             InitializeComponent();
         }
 
-        public void ClearInfo(bool keepUsername = false)
+        public void ClearInfo() => ClearInfo(false);
+        public void ClearInfo(bool keepUsername)
         {
             textBoxStudentId.Clear();
             textBoxPassword.Clear();
@@ -54,6 +55,7 @@ namespace CSIS3540Project
             textBoxPassword.Text = textBoxRegisterWord.Text;
             // Hide register grid for next time
             registerGrid.Visible = false;
+            AcceptButton = buttonLogin;
             // Return with DialogResult ignore
             DialogResult = DialogResult.Ignore;
         }
