@@ -9,9 +9,8 @@ namespace ServerProgram
 {
     interface IClientListener
     {
-        void BeginForConnections();
+        Task BeginWaitForConnections();
         void EndWaitForConnections();
-
-
+        void Disconnect();
     }
 }
