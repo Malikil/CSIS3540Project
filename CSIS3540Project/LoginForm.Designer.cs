@@ -63,7 +63,7 @@
             this.loginGrid.Controls.Add(this.textBoxUsername, 1, 0);
             this.loginGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.loginGrid.Location = new System.Drawing.Point(0, 0);
-            this.loginGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.loginGrid.Margin = new System.Windows.Forms.Padding(4);
             this.loginGrid.Name = "loginGrid";
             this.loginGrid.RowCount = 3;
             this.loginGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -75,10 +75,10 @@
             // textBoxPassword
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(200, 55);
-            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(132, 22);
-            this.textBoxPassword.TabIndex = 4;
+            this.textBoxPassword.TabIndex = 3;
             this.textBoxPassword.UseSystemPasswordChar = true;
             // 
             // loginButtons
@@ -93,20 +93,20 @@
             this.loginButtons.Controls.Add(this.buttonLogin, 0, 0);
             this.loginButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.loginButtons.Location = new System.Drawing.Point(4, 106);
-            this.loginButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.loginButtons.Margin = new System.Windows.Forms.Padding(4);
             this.loginButtons.Name = "loginButtons";
             this.loginButtons.RowCount = 1;
             this.loginButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.loginButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
+            this.loginButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.loginButtons.Size = new System.Drawing.Size(384, 44);
-            this.loginButtons.TabIndex = 0;
+            this.loginButtons.TabIndex = 4;
             // 
             // buttonQuit
             // 
             this.buttonQuit.AutoSize = true;
             this.buttonQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonQuit.Location = new System.Drawing.Point(260, 4);
-            this.buttonQuit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonQuit.Margin = new System.Windows.Forms.Padding(4);
             this.buttonQuit.Name = "buttonQuit";
             this.buttonQuit.Size = new System.Drawing.Size(100, 33);
             this.buttonQuit.TabIndex = 2;
@@ -118,7 +118,7 @@
             this.buttonRegister.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonRegister.AutoSize = true;
             this.buttonRegister.Location = new System.Drawing.Point(142, 4);
-            this.buttonRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonRegister.Margin = new System.Windows.Forms.Padding(4);
             this.buttonRegister.Name = "buttonRegister";
             this.buttonRegister.Size = new System.Drawing.Size(100, 33);
             this.buttonRegister.TabIndex = 1;
@@ -132,7 +132,7 @@
             this.buttonLogin.AutoSize = true;
             this.buttonLogin.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonLogin.Location = new System.Drawing.Point(24, 4);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(100, 33);
             this.buttonLogin.TabIndex = 0;
@@ -147,7 +147,7 @@
             this.labelUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 7);
             this.labelUsername.Name = "labelUsername";
             this.labelUsername.Size = new System.Drawing.Size(77, 17);
-            this.labelUsername.TabIndex = 1;
+            this.labelUsername.TabIndex = 0;
             this.labelUsername.Text = "Username:";
             // 
             // labelPassword
@@ -165,10 +165,10 @@
             // 
             this.textBoxUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxUsername.Location = new System.Drawing.Point(200, 25);
-            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(132, 22);
-            this.textBoxUsername.TabIndex = 3;
+            this.textBoxUsername.TabIndex = 1;
             // 
             // registerGrid
             // 
@@ -192,7 +192,7 @@
             this.registerGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.registerGrid.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.registerGrid.Size = new System.Drawing.Size(392, 154);
-            this.registerGrid.TabIndex = 5;
+            this.registerGrid.TabIndex = 1;
             this.registerGrid.Visible = false;
             // 
             // labelRegisterName
@@ -212,7 +212,7 @@
             this.textBoxRegisterName.Location = new System.Drawing.Point(199, 15);
             this.textBoxRegisterName.Name = "textBoxRegisterName";
             this.textBoxRegisterName.Size = new System.Drawing.Size(100, 22);
-            this.textBoxRegisterName.TabIndex = 2;
+            this.textBoxRegisterName.TabIndex = 1;
             // 
             // textBoxRegisterWord
             // 
@@ -230,7 +230,7 @@
             this.labelRegisterWord.Margin = new System.Windows.Forms.Padding(3, 5, 3, 6);
             this.labelRegisterWord.Name = "labelRegisterWord";
             this.labelRegisterWord.Size = new System.Drawing.Size(73, 17);
-            this.labelRegisterWord.TabIndex = 1;
+            this.labelRegisterWord.TabIndex = 2;
             this.labelRegisterWord.Text = "Password:";
             // 
             // labelStudentId
@@ -273,7 +273,7 @@
             this.buttonBack.TabIndex = 7;
             this.buttonBack.Text = "Cancel";
             this.buttonBack.UseVisualStyleBackColor = true;
-            this.buttonBack.Click += new System.EventHandler(this.RegisterCancel);
+            this.buttonBack.Click += new System.EventHandler(this.LoadForm);
             // 
             // LoginForm
             // 
@@ -285,12 +285,13 @@
             this.Controls.Add(this.registerGrid);
             this.Controls.Add(this.loginGrid);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.LoadForm);
             this.loginGrid.ResumeLayout(false);
             this.loginGrid.PerformLayout();
             this.loginButtons.ResumeLayout(false);

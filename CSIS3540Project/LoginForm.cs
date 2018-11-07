@@ -42,10 +42,16 @@ namespace CSIS3540Project
             textBoxRegisterName.Text = textBoxUsername.Text;
             textBoxRegisterWord.Text = textBoxPassword.Text;
             textBoxStudentId.Clear();
-            // Set register ok button as accept button
+            // Set enter button
             AcceptButton = buttonRegOk;
+            
             // Show registration information
             registerGrid.Visible = true;
+            loginGrid.Visible = false;
+
+            // Focus on proper text box
+            textBoxRegisterName.Focus();
+            textBoxRegisterName.SelectAll();
         }
 
         private void RegisterOk(object sender, EventArgs e)
@@ -53,21 +59,27 @@ namespace CSIS3540Project
             // Copy username and password to login boxes
             textBoxUsername.Text = textBoxRegisterName.Text;
             textBoxPassword.Text = textBoxRegisterWord.Text;
-            // Hide register grid for next time
-            registerGrid.Visible = false;
-            AcceptButton = buttonLogin;
+
             // Return with DialogResult ignore
             DialogResult = DialogResult.Ignore;
         }
 
-        private void RegisterCancel(object sender, EventArgs e)
+        private void LoadForm(object sender, EventArgs e)
         {
+            // Make sure the form is presentable, we're not sure exactly what
+            // state it's in right now
+
             // Hide registration grid
+            loginGrid.Visible = true;
             registerGrid.Visible = false;
-            // Set login button back to accept button
+
+            // Default button
             AcceptButton = buttonLogin;
-            // Optionally clear password from login box
-            //textBoxPassword.Clear();
+
+            // Focus
+            textBoxUsername.SelectAll();
+            if (textBoxUsername.CanFocus)
+                textBoxUsername.Focus();
         }
     }
 }
