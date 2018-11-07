@@ -25,7 +25,7 @@ namespace ServerProgram
             {
                 NamedPipeServerStream instream =
                     new NamedPipeServerStream(
-                        "TestPipeServerIn",
+                        "ProjectServerIn",
                         PipeDirection.In,
                         NamedPipeServerStream.MaxAllowedServerInstances,
                         PipeTransmissionMode.Byte,
@@ -33,7 +33,7 @@ namespace ServerProgram
                     );
                 NamedPipeServerStream outstream =
                     new NamedPipeServerStream(
-                        "TestPipeServerOut",
+                        "ProjectServerOut",
                         PipeDirection.Out,
                         NamedPipeServerStream.MaxAllowedServerInstances,
                         PipeTransmissionMode.Byte,
