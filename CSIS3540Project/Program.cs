@@ -32,14 +32,14 @@ namespace CSIS3540Project
                 {
                     outstream.Connect(3000);
                     instream.Connect(3000);
-                    StreamWriter writer = new StreamWriter(outstream);
-                    StreamReader reader = new StreamReader(instream);
+                    StreamWriter toserver = new StreamWriter(outstream);
+                    StreamReader fromserver = new StreamReader(instream);
 
                     if (result == DialogResult.OK)
                     {
                         // Attempt to login
-                        writer.WriteLine($"m=Login;u={login.Username};p={login.Password}");
-                        string response = reader.ReadLine();
+                        toserver.WriteLine($"m=Login;u={login.Username};p={login.Password}");
+                        string response = fromserver.ReadLine();
                         if (response != "false") // Login successful
                         {
                             // My current think with this part stems a bit from the
@@ -55,6 +55,9 @@ namespace CSIS3540Project
                             if (response == "admin")
                             {
                                 // Show admin form
+                                //Application.Run(new AdminForm(toserver, fromserver));
+                                toserver.Close();
+                                fromserver.Close();
                             }
                             else // response == "student"
                             {
