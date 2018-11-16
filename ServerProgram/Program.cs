@@ -10,12 +10,18 @@ namespace ServerProgram
     {
         static void Main(string[] args)
         {
+            /*
+            Test t = new Test();
+            t.AddStudentTest();
+            */
+            
             IClientListener server = new ClientListener();
             server.BeginWaitForConnections();
             Console.WriteLine("Press enter to quit");
             Console.ReadLine();
             server.EndWaitForConnections();
             server.Disconnect();
+            
         }
     }
 }
