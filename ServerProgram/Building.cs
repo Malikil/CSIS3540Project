@@ -15,7 +15,7 @@ namespace ServerProgram
             Floors = new HashSet<Floor>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BuildingID { get; set; }
 
         [Required]

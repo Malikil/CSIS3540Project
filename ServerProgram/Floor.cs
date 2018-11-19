@@ -15,7 +15,7 @@ namespace ServerProgram
             DormRooms = new HashSet<DormRoom>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FloorID { get; set; }
 
         public int BuildingID { get; set; }

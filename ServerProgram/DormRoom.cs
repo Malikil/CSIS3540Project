@@ -10,7 +10,7 @@ namespace ServerProgram
     public partial class DormRoom
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoomID { get; set; }
 
         public int Size { get; set; }

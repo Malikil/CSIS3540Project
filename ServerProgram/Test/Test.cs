@@ -20,5 +20,13 @@ namespace ServerProgram
             context.Student.Add(stu);
             context.SaveChanges();
         }
+
+        public void AddAccountTest()
+        {
+            var context = new CampusContext();
+            var acc = new Account() { Username = "HeitorUser", Password = "pass", StudentID = 12345 };
+            context.Account.Add(acc);
+            context.SaveChanges();
+        }
     }
 }

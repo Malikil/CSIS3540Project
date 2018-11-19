@@ -9,7 +9,7 @@ namespace ServerProgram
     [Table("Account")]
     public partial class Account
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AccountID { get; set; }
 
         [Required]

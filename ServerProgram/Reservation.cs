@@ -10,7 +10,7 @@ namespace ServerProgram
     public partial class Reservation
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ResID { get; set; }
 
         public int AccountID { get; set; }

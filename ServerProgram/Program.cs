@@ -10,10 +10,10 @@ namespace ServerProgram
     {
         static void Main(string[] args)
         {
-            /*
+            
             Test t = new Test();
-            t.AddStudentTest();
-            */
+            //t.AddStudentTest();
+            t.AddAccountTest();
             
             IClientListener server = new ClientListener();
             server.BeginWaitForConnections();
