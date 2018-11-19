@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServerProgram.Mappers;
 
 namespace ServerProgram
 {
@@ -10,11 +11,18 @@ namespace ServerProgram
     {
         static void Main(string[] args)
         {
-            
-            Test t = new Test();
+            // Test calls
+            //Test t = new Test();
             //t.AddStudentTest();
-            t.AddAccountTest();
-            
+            //t.AddAccountTest();
+
+            //StudentMapper studentMapper = new StudentMapper();
+            //studentMapper.ReadAllStudents();
+            //studentMapper.ReadStudentByID(12345);
+            //AccountMapper accountMapper = new AccountMapper();
+            //accountMapper.ReadAllAccounts();
+
+
             IClientListener server = new ClientListener();
             server.BeginWaitForConnections();
             Console.WriteLine("Press enter to quit");
