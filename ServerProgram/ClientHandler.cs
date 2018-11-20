@@ -15,7 +15,7 @@ namespace ServerProgram
 
         private readonly StreamReader _in;
         private readonly StreamWriter _out;
-        private CancellationToken CancellationToken;
+        // private CancellationToken CancellationToken;
 
         public ClientHandler(Stream instream, Stream outstream)
         {
@@ -28,16 +28,34 @@ namespace ServerProgram
 
         public async Task Run(CancellationToken cancellationToken)
         {
-            CancellationToken = cancellationToken;
+            // CancellationToken = cancellationToken;
+            try
+            {
+                // The first message will always be logging in
+                string command = await _in.ReadLineAsync();
+                string[] args = command.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                if (args.Length > 0)
+                {
+                    Entities.Account account;
+                    if (args[0] == "LOGIN")
+                        account = AccountMapper.GetAccountByUserPass(args[1], args[2]);
+                    else if (args[0] == "REGISTER")
+                    {
+                        // Make sure the student exists
 
-            // TODO Implement
-            // This will wait for messages, then respond to them.
-            // It might be better practice to handle messages elsewhere,
-            // but that's too much thinking for the amount of time we have
-            string command = _in.ReadLine();
-            // Parse command
-            _out.WriteLine("NULL");
+                    }
 
+                    while (!cancellationToken.IsCancellationRequested)
+                    {
+
+                        // TODO
+                    }
+                }
+                else
+                    await _out.WriteLineAsync("FAIL");
+            }
+            catch (ObjectDisposedException)
+            { }
 
             Disconnected?.Invoke(this, EventArgs.Empty);
         }

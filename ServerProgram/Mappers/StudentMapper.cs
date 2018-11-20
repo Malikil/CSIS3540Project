@@ -10,10 +10,10 @@ namespace ServerProgram.Mappers
     class StudentMapper
     {
         // Student CRUD operations
+        private static readonly CampusContext context = new CampusContext();
 
         public void CreateStudent(Student stu)
         {
-            var context = new CampusContext();
             context.Student.Add(stu);
             context.SaveChanges();
         }
@@ -26,12 +26,10 @@ namespace ServerProgram.Mappers
             return students;
         }
 
-        public List<Student> ReadStudentByID(int ID)
+        public Student ReadStudentByID(int ID)
         {
-            List<Student> students = new List<Student>();
-            var context = new CampusContext();
-            students = context.Student.Where(s => s.StudentID == ID).ToList();
-            return students;
+            Student student = context.Student.Where(s => s.StudentID == ID).FirstOrDefault();
+            return student;
         }
     }
 }

@@ -10,20 +10,26 @@ namespace ServerProgram.Mappers
     class AccountMapper
     {
         // Account CRUD operations
+        private static readonly CampusContext context = new CampusContext();
 
         public static void CreateAccount(Account acc)
         {
-            var context = new CampusContext();
             context.Account.Add(acc);
             context.SaveChanges();
         }
 
         public static List<Account> ReadAllAccounts()
         {
-            List<Account> accounts = new List<Account>();
-            var context = new CampusContext();
-            accounts = context.Account.ToList();
-            return accounts;
+            return context.Account.ToList();
+        }
+
+        public static Account GetAccountByUserPass(string username, string password)
+        {
+            var acc = from account in context.Account
+                      where account.Username == username &&
+                            account.Password == password
+                      select account;
+            return acc.FirstOrDefault();
         }
     }
 }
