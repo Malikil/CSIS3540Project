@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
+using ServerProgram.Entities;
 
 namespace ServerProgram
 {

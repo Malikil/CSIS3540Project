@@ -8,15 +8,15 @@ using System.IO.Pipes;
 
 namespace ServerProgram
 {
-    class ClientListener : IClientListener
+    class ClientListener
     {
         private readonly CancellationTokenSource tokenSource;
-        private readonly HashSet<IClientHandler> clients;
+        private readonly HashSet<ClientHandler> clients;
 
         public ClientListener()
         {
             tokenSource = new CancellationTokenSource();
-            clients = new HashSet<IClientHandler>();
+            clients = new HashSet<ClientHandler>();
         }
 
         public async Task BeginWaitForConnections()
@@ -47,11 +47,11 @@ namespace ServerProgram
                     await inAwaiter;
                     await outAwaiter;
 
-                    IClientHandler client = new ClientHandler(instream, outstream);
+                    ClientHandler client = new ClientHandler(instream, outstream);
                     clients.Add(client);
                     client.Disconnected += (sender, e) =>
                     {
-                        if (sender is IClientHandler current)
+                        if (sender is ClientHandler current)
                             clients.Remove(current);
                     };
                     client.Run(tokenSource.Token);
@@ -66,7 +66,10 @@ namespace ServerProgram
             if (!tokenSource.IsCancellationRequested)
                 tokenSource.Cancel();
             Thread.Sleep(250);
-            foreach (IClientHandler client in clients)
+            ClientHandler[] oldClients = new ClientHandler[clients.Count];
+            clients.CopyTo(oldClients);
+            
+            foreach (ClientHandler client in oldClients)
                 client.Disconnect();
         }
 

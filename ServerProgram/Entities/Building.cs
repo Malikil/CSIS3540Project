@@ -1,4 +1,4 @@
-namespace ServerProgram
+namespace ServerProgram.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -6,23 +6,23 @@ namespace ServerProgram
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Student")]
-    public partial class Student
+    [Table("Building")]
+    public partial class Building
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
+        public Building()
         {
-            Accounts = new HashSet<Account>();
+            Floors = new HashSet<Floor>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int StudentID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int BuildingID { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(50)]
         public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<Floor> Floors { get; set; }
     }
 }

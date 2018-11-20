@@ -1,4 +1,4 @@
-namespace ServerProgram
+namespace ServerProgram.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -9,15 +9,13 @@ namespace ServerProgram
     [Table("Account")]
     public partial class Account
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
         public int AccountID { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required, StringLength(50)]
         public string Username { get; set; }
 
-        [Required]
-        [StringLength(255)]
+        [Required, StringLength(255)]
         public string Password { get; set; }
 
         public int StudentID { get; set; }
