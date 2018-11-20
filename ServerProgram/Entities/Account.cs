@@ -18,7 +18,7 @@ namespace ServerProgram.Entities
         [Required, StringLength(255)]
         public string Password { get; set; }
 
-        public int StudentID { get; set; }
+        public int? StudentID { get; set; }
 
         public virtual Student Student { get; set; }
 

@@ -23,7 +23,7 @@ namespace ServerProgram.Mappers
             return context.Account.ToList();
         }
 
-        public static Account GetAccountByUserPass(string username, string password)
+        public static Account ReadAccountByUserPass(string username, string password)
         {
             var acc = from account in context.Account
                       where account.Username == username &&

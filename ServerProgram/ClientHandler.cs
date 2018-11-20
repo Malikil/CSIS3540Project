@@ -36,19 +36,38 @@ namespace ServerProgram
                 string[] args = command.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                 if (args.Length > 0)
                 {
-                    Entities.Account account;
+                    Entities.Account account = null;
                     if (args[0] == "LOGIN")
-                        account = AccountMapper.GetAccountByUserPass(args[1], args[2]);
+                        account = AccountMapper.ReadAccountByUserPass(args[1], args[2]);
                     else if (args[0] == "REGISTER")
                     {
                         // Make sure the student exists
-
+                        if (StudentMapper.ReadStudentByID(int.Parse(args[3])) != null &&
+                            AccountMapper.ReadAccountByUserPass(args[1], args[2]) == null)
+                        {
+                            account = new Entities.Account()
+                            {
+                                Username = args[1],
+                                Password = args[2],
+                                StudentID = int.Parse(args[3])
+                            };
+                            AccountMapper.CreateAccount(account);
+                        }
                     }
 
-                    while (!cancellationToken.IsCancellationRequested)
-                    {
+                    if (account == null)
+                        await _out.WriteLineAsync("FAIL");
+                    else if (account.StudentID == null)
+                        await _out.WriteLineAsync("ADMIN");
+                    else
+                        await _out.WriteLineAsync("STUDENT");
 
+                    while (!cancellationToken.IsCancellationRequested &&
+                        _in.BaseStream.CanRead && _out.BaseStream.CanWrite)
+                    {
+                        command = await _in.ReadLineAsync();
                         // TODO
+                        await _out.WriteLineAsync(command);
                     }
                 }
                 else

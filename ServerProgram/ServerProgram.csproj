@@ -60,6 +60,10 @@
     <Compile Include="Entities\DormRoom.cs" />
     <Compile Include="Entities\Floor.cs" />
     <Compile Include="Mappers\AccountMapper.cs" />
+    <Compile Include="Mappers\BuildingMapper.cs" />
+    <Compile Include="Mappers\DormRoomMapper.cs" />
+    <Compile Include="Mappers\FloorMapper.cs" />
+    <Compile Include="Mappers\ReservationMapper.cs" />
     <Compile Include="Mappers\StudentMapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

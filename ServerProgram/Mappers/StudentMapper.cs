@@ -12,13 +12,13 @@ namespace ServerProgram.Mappers
         // Student CRUD operations
         private static readonly CampusContext context = new CampusContext();
 
-        public void CreateStudent(Student stu)
+        public static void CreateStudent(Student stu)
         {
             context.Student.Add(stu);
             context.SaveChanges();
         }
 
-        public List<Student> ReadAllStudents()
+        public static List<Student> ReadAllStudents()
         {
             List<Student> students = new List<Student>();
             var context = new CampusContext();
@@ -26,7 +26,7 @@ namespace ServerProgram.Mappers
             return students;
         }
 
-        public Student ReadStudentByID(int ID)
+        public static Student ReadStudentByID(int ID)
         {
             Student student = context.Student.Where(s => s.StudentID == ID).FirstOrDefault();
             return student;
