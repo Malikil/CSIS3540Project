@@ -11,14 +11,14 @@ namespace ServerProgram.Mappers
     {
         // Account CRUD operations
 
-        public void CreateAccount(Account acc)
+        public static void CreateAccount(Account acc)
         {
             var context = new CampusContext();
             context.Account.Add(acc);
             context.SaveChanges();
         }
 
-        public List<Account> ReadAllAccounts()
+        public static List<Account> ReadAllAccounts()
         {
             List<Account> accounts = new List<Account>();
             var context = new CampusContext();

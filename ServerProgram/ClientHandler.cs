@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
+using ServerProgram.Mappers;
 
 namespace ServerProgram
 {
@@ -28,11 +29,15 @@ namespace ServerProgram
         public async Task Run(CancellationToken cancellationToken)
         {
             CancellationToken = cancellationToken;
-            
+
             // TODO Implement
             // This will wait for messages, then respond to them.
             // It might be better practice to handle messages elsewhere,
             // but that's too much thinking for the amount of time we have
+            string command = _in.ReadLine();
+            // Parse command
+            _out.WriteLine("NULL");
+
 
             Disconnected?.Invoke(this, EventArgs.Empty);
         }
