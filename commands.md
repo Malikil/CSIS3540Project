@@ -5,7 +5,12 @@ No other messages will be initiated by the server, the client can expect to alwa
 All messages will have several components, separated by semi-colons (`;`). The first word will be all caps, and determines the main goal of the message. For messages with only one word (i.e there is no further information beyond the key word), the word will still be all caps, but no semicolons are required.  
 Non-newline whitespace next to semicolons will be ignored, and can optionally be included to help readability of commands in-code. Newlines are reserved for the end of a message, and should not be included anywhere in the middle of a message.
 
-## Client Admin messages
+## Client
+### Logging in
+Send login type
+* `LOGIN` for logging in with an existing account. Use the format `LOGIN;<username>;<password>`
+* `REGISTER` for creating a new account, student id is required. Use the format `REGISTER;<username>;<password>;<studentid>`
+### Admin messages
 #### ADD
 For adding items directly to tables. Used for students, rooms, and floors/buildings if we get that far.  
 Second word will be the type of item being added, either `Student` or `Room`.  
