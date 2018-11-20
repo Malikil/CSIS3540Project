@@ -8,9 +8,8 @@ using System.Threading;
 
 namespace ServerProgram
 {
-    class ClientHandler : IClientHandler
+    class ClientHandler
     {
-        public event EventHandler<string> MessageReceived;
         public event EventHandler Disconnected;
 
         private readonly StreamReader _in;
@@ -31,6 +30,9 @@ namespace ServerProgram
             CancellationToken = cancellationToken;
             
             // TODO Implement
+            // This will wait for messages, then respond to them.
+            // It might be better practice to handle messages elsewhere,
+            // but that's too much thinking for the amount of time we have
 
             Disconnected?.Invoke(this, EventArgs.Empty);
         }
@@ -41,11 +43,6 @@ namespace ServerProgram
             _in.Close();
 
             Disconnected?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void SendMessage(string message)
-        {
-            _out.WriteLine(message);
         }
     }
 }

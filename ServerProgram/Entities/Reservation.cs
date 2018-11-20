@@ -1,4 +1,4 @@
-namespace ServerProgram
+namespace ServerProgram.Entities
 {
     using System;
     using System.Collections.Generic;

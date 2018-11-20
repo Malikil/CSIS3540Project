@@ -11,10 +11,10 @@ namespace ServerProgram
     {
         static void Main(string[] args)
         {
-            // Test calls
-            //Test t = new Test();
-            //t.AddStudentTest();
-            //t.AddAccountTest();
+            //Test calls
+            Test t = new Test();
+            t.AddStudentTest();
+            t.AddAccountTest();
 
             //StudentMapper studentMapper = new StudentMapper();
             //studentMapper.ReadAllStudents();
@@ -22,8 +22,8 @@ namespace ServerProgram
             //AccountMapper accountMapper = new AccountMapper();
             //accountMapper.ReadAllAccounts();
 
-
-            IClientListener server = new ClientListener();
+            return;
+            ClientListener server = new ClientListener();
             server.BeginWaitForConnections();
             Console.WriteLine("Press enter to quit");
             Console.ReadLine();

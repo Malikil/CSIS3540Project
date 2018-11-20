@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServerProgram.Entities;
 
 namespace ServerProgram
 {
@@ -16,7 +17,7 @@ namespace ServerProgram
         public void AddStudentTest()
         {
             var context = new CampusContext();
-            var stu = new Student() { StudentID = 12345, Name = "Heitor"};
+            var stu = new Student() { Name = "Heitor"};
             context.Student.Add(stu);
             context.SaveChanges();
         }
