@@ -2,8 +2,10 @@
 Client will send a message, then wait for a response from the server. Server will wait for a message, then send an appropriate response.  
 No other messages will be initiated by the server, the client can expect to always receive one, and only one, message in response to every one it sends.
 
-All messages will have several components, separated by semi-colons (`;`). The first word will be all caps, and determines the main goal of the message. For messages with only one word (i.e there is no further information beyond the key word), the word will still be all caps, but no semicolons are required.  
-Non-newline whitespace next to semicolons will be ignored, and can optionally be included to help readability of commands in-code. Newlines are reserved for the end of a message, and should not be included anywhere in the middle of a message.
+All messages will have several segments, separated by semi-colons (`;`). The first word will be all caps, and determines the main goal of the message. The last segment of a message will always be `END`, even if messages don't have other information in the body.  
+A special exception exists for logging in, as that message is only sent once as the first message sent either way. `END` is not required for login.
+
+Whitespace next to semicolons should be ignored, and can optionally be included to help readability of commands in-code. Whitespace can include newlines, so when reading information make sure to keep reading until `END` is found.
 
 ## Client
 ### Logging in
@@ -28,5 +30,6 @@ Respond with account type
 * `STUDENT` Atudent login successful or account created successful
 
 ### Admin responses
+When sending a table: `KEYWORD;tableschema.xsd;tablecontents.xml;END`
 #### ROOMS
 When the admin requests a list of rooms, the server will need to send the table. I'm thinking just the table, could be in xml format for clarity, or we could make some sort of compression algorithm in an attempt to keep the streams from working too hard.
