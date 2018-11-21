@@ -15,10 +15,10 @@ namespace ServerProgram
 
         private readonly StreamReader _in;
         private readonly StreamWriter _out;
-        // private CancellationToken CancellationToken;
 
         public ClientHandler(Stream instream, Stream outstream)
         {
+            Console.WriteLine("Connection Received");
             _in = new StreamReader(instream);
             _out = new StreamWriter(outstream)
             {
@@ -26,14 +26,14 @@ namespace ServerProgram
             };
         }
 
-        public async Task Run(CancellationToken cancellationToken)
+        public async Task Run()
         {
-            // CancellationToken = cancellationToken;
+            Console.WriteLine("Connection Accepted");
             try
             {
                 // The first message will always be logging in
                 string command = await _in.ReadLineAsync();
-                string[] args = command.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] args = command.Split(new[] { ';' },StringSplitOptions.None);
                 if (args.Length > 0)
                 {
                     Entities.Account account = null;
@@ -62,12 +62,11 @@ namespace ServerProgram
                     else
                         await _out.WriteLineAsync("STUDENT");
 
-                    while (!cancellationToken.IsCancellationRequested &&
-                        _in.BaseStream.CanRead && _out.BaseStream.CanWrite)
+                    while ((command = await _in.ReadLineAsync()) != null)
                     {
-                        command = await _in.ReadLineAsync();
+                        Console.WriteLine("Received: " + command);
                         // TODO
-                        await _out.WriteLineAsync(command);
+                        await _out.WriteLineAsync("NULL");
                     }
                 }
                 else
@@ -75,8 +74,9 @@ namespace ServerProgram
             }
             catch (ObjectDisposedException)
             { }
-
+            
             Disconnected?.Invoke(this, EventArgs.Empty);
+            Console.WriteLine("Connection Ended");
         }
 
         public void Disconnect()
@@ -84,7 +84,7 @@ namespace ServerProgram
             _out.Close();
             _in.Close();
 
-            Disconnected?.Invoke(this, EventArgs.Empty);
+            // Disconnected?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -32,36 +32,34 @@ namespace CSIS3540Project
                 {
                     outstream.Connect(3000);
                     instream.Connect(3000);
-                    StreamWriter toserver = new StreamWriter(outstream);
+                    StreamWriter toserver = new StreamWriter(outstream)
+                    {
+                        AutoFlush = true
+                    };
                     StreamReader fromserver = new StreamReader(instream);
 
                     if (result == DialogResult.OK)
                     {
                         // Attempt to login
-                        toserver.WriteLine($"m=Login;u={login.Username};p={login.Password}");
+                        toserver.WriteLine($"LOGIN;{login.Username};{login.Password}");
                         string response = fromserver.ReadLine();
-                        if (response != "false") // Login successful
+                        if (response != "FAIL") // Login successful
                         {
-                            // My current think with this part stems a bit from the
-                            // last large project I did for Data Structures and
-                            // Algorithms, our project was fairly large and used
-                            // windows in java. The goal we were going for with
-                            // that was to keep most of the actual logic outside
-                            // the forms themselves, and use a controller class
-                            // that handles the server communication and just tells
-                            // the form what to display when. No actual logic was
-                            // in the form itself.
-                            
-                            if (response == "admin")
+                            if (response == "ADMIN")
                             {
                                 // Show admin form
+                                MessageBox.Show("Logged in as admin", "Logged in");
                                 //Application.Run(new AdminForm(toserver, fromserver));
-                                toserver.Close();
-                                fromserver.Close();
                             }
-                            else // response == "student"
+                            else if (response == "STUDENT")
                             {
                                 // Show student form
+                                MessageBox.Show("Logged in as student", "Logged in");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Server rejected connection", "Login Error");
+                                login.ClearInfo();
                             }
                         }
                         else // Login failed
@@ -86,6 +84,14 @@ namespace CSIS3540Project
                             login.ClearInfo();
                         }
                     }
+
+                    try
+                    {
+                        toserver.Close();
+                        fromserver.Close();
+                    }
+                    catch (IOException)
+                    { }
                 }
                 catch (TimeoutException)
                 {

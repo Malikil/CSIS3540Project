@@ -54,7 +54,8 @@ namespace ServerProgram
                         if (sender is ClientHandler current)
                             clients.Remove(current);
                     };
-                    client.Run(tokenSource.Token);
+                    
+                    client.Run();
                 }
                 catch (OperationCanceledException)
                 { }
