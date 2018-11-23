@@ -1,4 +1,4 @@
-﻿namespace CSIS5340Project
+﻿namespace CSIS3540Project
 {
     partial class Form1
     {
