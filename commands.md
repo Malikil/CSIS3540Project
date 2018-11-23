@@ -5,7 +5,8 @@ No other messages will be initiated by the server, the client can expect to alwa
 All messages will have several segments, separated by semi-colons (`;`). The first word will be all caps, and determines the main goal of the message. The last segment of a message will always be `END`, even if messages don't have other information in the body.  
 A special exception exists for logging in, as that message is only sent once as the first message sent either way. `END` is not required for login.
 
-Whitespace next to semicolons should be ignored, and can optionally be included to help readability of commands in-code. Whitespace can include newlines, so when reading information make sure to keep reading until `END` is found.
+Whitespace next to semicolons should be ignored, and can optionally be included to help readability of commands in-code. Whitespace can include newlines, so when reading information make sure to keep reading until `END` is found.  
+If the first segment of a message is empty, that signals the end of the connection. Even if `END` would otherwise be received later.
 
 ## Client
 ### Logging in
