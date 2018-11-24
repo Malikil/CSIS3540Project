@@ -47,7 +47,10 @@ namespace CSIS3540Project
                         {
                             if (response == "ADMIN")
                             {
+                                // Get all rooms and availability
+                                toserver.WriteLine();
                                 // Show admin form
+
                                 MessageBox.Show("Logged in as admin", "Logged in");
                                 //Application.Run(new AdminForm(toserver, fromserver));
                             }
