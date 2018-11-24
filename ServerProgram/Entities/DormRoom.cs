@@ -22,5 +22,16 @@ namespace ServerProgram.Entities
         public virtual Floor Floor { get; set; }
 
         public virtual ICollection<Reservation> Reservations { get; set; }
+
+        public DBEntities.DormRoom Simplify()
+        {
+            return new DBEntities.DormRoom()
+            {
+                RoomID = RoomID,
+                Size = Size,
+                Capacity = Capacity,
+                FloorID = FloorID
+            };
+        }
     }
 }

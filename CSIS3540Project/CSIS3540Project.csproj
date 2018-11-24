@@ -65,5 +65,11 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBEntities\DBEntities.csproj">
+      <Project>{5b11a34f-454e-4b6d-ba37-11051f305a83}</Project>
+      <Name>DBEntities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

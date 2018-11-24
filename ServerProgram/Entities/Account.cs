@@ -23,5 +23,16 @@ namespace ServerProgram.Entities
         public virtual Student Student { get; set; }
 
         public virtual ICollection<Reservation> Reservations{ get; set; }
+
+        public DBEntities.Account Simplify()
+        {
+            return new DBEntities.Account()
+            {
+                AccountID = AccountID,
+                Username = Username,
+                Password = Password,
+                StudentID = StudentID
+            };
+        }
     }
 }

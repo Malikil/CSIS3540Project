@@ -24,5 +24,14 @@ namespace ServerProgram.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Floor> Floors { get; set; }
+
+        public DBEntities.Building Simplify()
+        {
+            return new DBEntities.Building()
+            {
+                BuildingID = BuildingID,
+                Name = Name
+            };
+        }
     }
 }
