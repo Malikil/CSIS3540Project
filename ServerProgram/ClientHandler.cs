@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
 using ServerProgram.Mappers;
+using System.Xml.Serialization;
+using ServerProgram.Entities;
 
 namespace ServerProgram
 {
@@ -20,10 +22,7 @@ namespace ServerProgram
         {
             Console.WriteLine("Connection Received");
             _in = new StreamReader(instream);
-            _out = new StreamWriter(outstream)
-            {
-                AutoFlush = true
-            };
+            _out = new StreamWriter(outstream);
         }
 
         public async Task Run()
@@ -33,23 +32,27 @@ namespace ServerProgram
             {
                 // The first message will always be logging in
                 string command = await _in.ReadLineAsync();
-                string[] args = command.Split(new[] { ';' },StringSplitOptions.None);
+                string[] args = command.Split(';');
                 if (args.Length > 0)
                 {
-                    Entities.Account account = null;
+                    for (int i = 0; i < args.Length; i++)
+                        args[i] = args[i].Trim();
+
+                    Account account = null;
                     if (args[0] == "LOGIN")
                         account = AccountMapper.ReadAccountByUserPass(args[1], args[2]);
                     else if (args[0] == "REGISTER")
                     {
                         // Make sure the student exists
-                        if (StudentMapper.ReadStudentByID(int.Parse(args[3])) != null &&
+                        if (int.TryParse(args[3], out int id) &&
+                            StudentMapper.ReadStudentByID(id) != null &&
                             AccountMapper.ReadAccountByUserPass(args[1], args[2]) == null)
                         {
-                            account = new Entities.Account()
+                            account = new Account()
                             {
                                 Username = args[1],
                                 Password = args[2],
-                                StudentID = int.Parse(args[3])
+                                StudentID = id
                             };
                             AccountMapper.CreateAccount(account);
                         }
@@ -61,22 +64,46 @@ namespace ServerProgram
                         await _out.WriteLineAsync("ADMIN");
                     else
                         await _out.WriteLineAsync("STUDENT");
+                    await _out.FlushAsync();
 
-                    while ((command = await _in.ReadLineAsync()) != null)
+                    while ((args = (await _in.ReadLineAsync())?.Split(';')).Length > 0)
                     {
-                        Console.WriteLine("Received: " + command);
-                        // TODO
-                        await _out.WriteLineAsync("NULL");
+                        for (int i = 0; i < args.Length; i++)
+                            args[i] = args[i].Trim();
+
+                        switch (args[0])
+                        {
+                            // TODO
+                            default:
+                                await _out.WriteLineAsync("FAIL;END");
+                                break;
+                        }
+                        await _out.FlushAsync();
                     }
                 }
                 else
+                {
                     await _out.WriteLineAsync("FAIL");
+                    await _out.FlushAsync();
+                }
             }
             catch (ObjectDisposedException)
             { }
             
             Disconnected?.Invoke(this, EventArgs.Empty);
             Console.WriteLine("Connection Ended");
+        }
+
+        // Temp method, not using it after all.
+        // Keeping for reference until XmlSerializer is used above
+        private async Task HandleCommands()
+        {
+            string[] args;
+            while ((args = (await _in.ReadLineAsync())?.Split(';')).Length > 0)
+            {
+                new XmlSerializer(typeof(List<Student>)).Serialize(_out, StudentMapper.ReadAllStudents());
+                await _out.WriteLineAsync("NULL");
+            }
         }
 
         public void Disconnect()
