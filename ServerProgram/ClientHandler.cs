@@ -66,11 +66,8 @@ namespace ServerProgram
                         await _out.WriteLineAsync("STUDENT");
                     await _out.FlushAsync();
 
-                    while ((args = (await _in.ReadLineAsync())?.Split(';')).Length > 0)
+                    while ((args = await GetArgs()).Length > 0)
                     {
-                        for (int i = 0; i < args.Length; i++)
-                            args[i] = args[i].Trim();
-
                         switch (args[0])
                         {
                             // TODO
@@ -92,6 +89,26 @@ namespace ServerProgram
             
             Disconnected?.Invoke(this, EventArgs.Empty);
             Console.WriteLine("Connection Ended");
+        }
+
+        private async Task<string[]> GetArgs()
+        {
+            StringBuilder sb = new StringBuilder();
+            string current = await _in.ReadLineAsync();
+            if (current == null || current == "")
+                return new string[0];
+
+            while (!current.EndsWith("END"))
+            {
+                sb.Append(current);
+                current = await _in.ReadLineAsync();
+                current = current?.Trim();
+            }
+            string[] args = sb.ToString().Split(';');
+            for (int i = 0; i < args.Length; i++)
+                args[i] = args[i].Trim();
+
+            return args;
         }
 
         // Temp method, not using it after all.
