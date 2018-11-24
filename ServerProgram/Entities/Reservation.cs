@@ -26,5 +26,17 @@ namespace ServerProgram.Entities
         public virtual Account Account { get; set; }
 
         public virtual DormRoom DormRoom { get; set; }
+        
+        public DBEntities.Reservation Simplify()
+        {
+            return new DBEntities.Reservation()
+            {
+                ResID = ResID,
+                AccountID = AccountID,
+                RoomID = RoomID,
+                StartDate = StartDate,
+                EndDate = EndDate
+            };
+        }
     }
 }

@@ -24,5 +24,14 @@ namespace ServerProgram.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
+
+        public DBEntities.Student Simplify()
+        {
+            return new DBEntities.Student()
+            {
+                StudentID = StudentID,
+                Name = Name
+            };
+        }
     }
 }
