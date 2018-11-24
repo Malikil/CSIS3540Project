@@ -23,6 +23,10 @@ e.g `ADD;Student;Jeremy;Smith`
 #### REMOVE
 e.g `REMOVE;Student;10`
 
+### Student Messages
+#### Get available rooms
+`AVAILABLE;<StartDate>;<EndDate>;END`
+
 ## Server response messages
 ### Logging in
 Respond with account type
@@ -34,3 +38,7 @@ Respond with account type
 When sending a table: `KEYWORD;tableschema.xsd;tablecontents.xml;END`
 #### ROOMS
 When the admin requests a list of rooms, the server will need to send the table. I'm thinking just the table, could be in xml format for clarity, or we could make some sort of compression algorithm in an attempt to keep the streams from working too hard.
+
+### Student responses
+#### ROOMS
+`ROOMS;<listofrooms.xml>;END`
