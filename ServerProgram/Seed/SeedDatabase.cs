@@ -67,7 +67,28 @@ namespace ServerProgram.Seed
 
         public void SeedDormRooms()
         {
-
+            TextReader textReader = new StreamReader(@"Seed/DormRoom_Seed.csv");
+            var csv = new CsvReader(textReader);
+            int counter = 0;
+            while (csv.Read())
+            {
+                var size = csv.GetField<string>(0);
+                var cap = csv.GetField<string>(1);
+                var floor = csv.GetField<string>(2);
+                var roomnum = csv.GetField<string>(3);
+                if (counter > 0)
+                {
+                    DormRoom dorm = new DormRoom()
+                    {
+                        Size = int.Parse(size),
+                        Capacity = int.Parse(cap),
+                        FloorID = int.Parse(floor),
+                        RoomNumber = int.Parse(roomnum)
+                    };
+                    DormRoomMapper.CreateDormRoom(dorm);
+                }
+                counter++;
+            }
         }
 
         public void SeedReservations()
