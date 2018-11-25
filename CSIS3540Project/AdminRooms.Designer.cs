@@ -1,6 +1,6 @@
 ﻿namespace CSIS3540Project
 {
-    partial class AdminStudents
+    partial class AdminRooms
     {
         /// <summary>
         /// Required designer variable.

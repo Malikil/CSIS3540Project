@@ -11,7 +11,7 @@ using DBEntities;
 
 namespace CSIS3540Project
 {
-    public partial class AdminStudents : Form
+    public partial class AdminRooms : Form
     {
         List<Student> studentsList = null;
         List<DormRoom> roomList = null;
@@ -20,7 +20,7 @@ namespace CSIS3540Project
         DataView studentsView, roomsView;
         public int roomx;
 
-        public AdminStudents()
+        public AdminRooms()
         {
             InitializeComponent();
 
@@ -145,7 +145,7 @@ namespace CSIS3540Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Students studentsForm = new Students();
+            AdminStudents studentsForm = new AdminStudents();
             studentsForm.ShowDialog();
         }
 
@@ -174,13 +174,14 @@ namespace CSIS3540Project
         private void buttonInsert_Click(object sender, EventArgs e)
         {
             int roomId = int.Parse(RoomIdTextBox.Text), size = int.Parse(SizeTextBox.Text), stuId = int.Parse(StuIdTextBox.Text);
-            int lenght = roomList.Count(), last = lenght - 1, id = (roomList[lenght - 1].StudentID) + 1;
-            roomList.Add(new Room { RoomID = roomId, Size = size, StudentID = stuId });
+            int lenght = roomList.Count(), last = lenght - 1;
+            //int id = (roomList[lenght - 1].StudentID) + 1;
+            roomList.Add(new DormRoom { RoomID = roomId, Size = size});
 
             var newRow = roomsTable.NewRow();
             newRow[0] = roomList[lenght].RoomID;
             newRow[1] = roomList[lenght].Size;
-            newRow[2] = roomList[lenght].StudentID;
+           // newRow[2] = roomList[lenght].StudentID;
 
             roomsTable.Rows.Add(newRow);
 
