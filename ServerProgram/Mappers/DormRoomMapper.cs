@@ -9,7 +9,7 @@ namespace ServerProgram.Mappers
 {
     class DormRoomMapper
     {
-        public void CreateDormRoom(DormRoom room)
+        public static void CreateDormRoom(DormRoom room)
         {
             var context = new CampusContext();
             context.DormRoom.Add(room);

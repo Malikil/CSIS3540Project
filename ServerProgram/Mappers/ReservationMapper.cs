@@ -9,7 +9,7 @@ namespace ServerProgram.Mappers
 {
     class ReservationMapper
     {
-        public void CreateReservation(Reservation reservation)
+        public static void CreateReservation(Reservation reservation)
         {
             var context = new CampusContext();
             context.Reservation.Add(reservation);
