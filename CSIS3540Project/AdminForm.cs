@@ -171,9 +171,8 @@ namespace CSIS3540Project
 
 
         #region send to server example
-        private void buttonInsert_Click(object sender, EventArgs e)
+        private void buttonInsert_Click_1(object sender, EventArgs e)
         {
-            // Open a connection to the server
             NamedPipeClientStream instream = new NamedPipeClientStream(".", Program.PIPE_FROM_SERVER, PipeDirection.In);
             NamedPipeClientStream outstream = new NamedPipeClientStream(".", Program.PIPE_TO_SERVER, PipeDirection.Out);
             instream.Connect(2500);
@@ -182,7 +181,10 @@ namespace CSIS3540Project
             using (StreamWriter toserver = new StreamWriter(outstream))
             {
                 toserver.WriteLine("ROOM");
-                //toserver.WriteLine(roomIdTextBoxSearch.Text);
+                toserver.WriteLine(RoomSizeTextBox.Text);
+                toserver.WriteLine(roomCapacityTextBox.Text);
+                toserver.WriteLine(FloorIDTextBox.Text);
+                toserver.WriteLine(roomNumbertextBox.Text);
             }
 
             // Read the response elsewhere so the main thread isn't blocked
@@ -222,25 +224,7 @@ namespace CSIS3540Project
             }
         }
 
-        private void buttonInsert_Click_1(object sender, EventArgs e)
-        {
-            NamedPipeClientStream instream = new NamedPipeClientStream(".", Program.PIPE_FROM_SERVER, PipeDirection.In);
-            NamedPipeClientStream outstream = new NamedPipeClientStream(".", Program.PIPE_TO_SERVER, PipeDirection.Out);
-            instream.Connect(2500);
-            outstream.Connect(2500);
-            // Send the required information to the server
-            using (StreamWriter toserver = new StreamWriter(outstream))
-            {
-                toserver.WriteLine("ROOM");
-                toserver.WriteLine(RoomSizeTextBox.Text);
-                toserver.WriteLine(roomCapacityTextBox.Text);
-                toserver.WriteLine(FloorIDTextBox.Text);
-                toserver.WriteLine(roomNumbertextBox.Text);
-            }
-
-            // Read the response elsewhere so the main thread isn't blocked
-            GetRoomList(instream);
-        }
+        
 
         private void buttonLoad_Click_1(object sender, EventArgs e)
         {
