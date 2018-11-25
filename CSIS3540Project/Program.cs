@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Pipes;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace CSIS3540Project
 {
@@ -32,23 +33,25 @@ namespace CSIS3540Project
                 {
                     outstream.Connect(3000);
                     instream.Connect(3000);
-                    StreamWriter toserver = new StreamWriter(outstream)
-                    {
-                        AutoFlush = true
-                    };
-                    StreamReader fromserver = new StreamReader(instream);
 
                     if (result == DialogResult.OK)
                     {
                         // Attempt to login
-                        toserver.WriteLine($"LOGIN;{login.Username};{login.Password}");
-                        string response = fromserver.ReadLine();
+                        using (StreamWriter toserver = new StreamWriter(outstream))
+                        {
+                            toserver.WriteLine($"LOGIN");
+                            toserver.WriteLine(login.Username);
+                            toserver.WriteLine(login.Password);
+                        }
+
+                        string response;
+                        using (StreamReader fromserver = new StreamReader(instream))
+                            response = fromserver.ReadLine();
                         if (response != "FAIL") // Login successful
                         {
                             if (response == "ADMIN")
                             {
                                 // Get all rooms and availability
-                                toserver.WriteLine();
                                 // Show admin form
 
                                 MessageBox.Show("Logged in as admin", "Logged in");
@@ -74,12 +77,21 @@ namespace CSIS3540Project
                     else // result == DialogResult.Ignore
                     {
                         // Attempt to create account
-                        bool created = false;
-                        if (created) // Account created
+                        using (StreamWriter toserver = new StreamWriter(outstream))
                         {
-                            // Clear info and show login screen again with
-                            // pre-entered username
-                            login.ClearInfo(true);
+                            toserver.WriteLine($"REGISTER");
+                            toserver.WriteLine(login.Username);
+                            toserver.WriteLine(login.Password);
+                            toserver.WriteLine(login.StudentID);
+                        }
+
+                        string response;
+                        using (StreamReader fromserver = new StreamReader(instream))
+                            response = fromserver.ReadLine();
+
+                        if (response == "STUDENT") // Account created
+                        {
+                            MessageBox.Show("Logged in as student");
                         }
                         else // Account not created
                         {
@@ -87,14 +99,6 @@ namespace CSIS3540Project
                             login.ClearInfo();
                         }
                     }
-
-                    try
-                    {
-                        toserver.Close();
-                        fromserver.Close();
-                    }
-                    catch (IOException)
-                    { }
                 }
                 catch (TimeoutException)
                 {

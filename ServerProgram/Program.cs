@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ServerProgram.Mappers;
+using System.Threading;
 
 namespace ServerProgram
 {
@@ -11,12 +12,15 @@ namespace ServerProgram
     {
         static void Main(string[] args)
         {
-            ClientListener server = new ClientListener();
-            server.BeginWaitForConnections();
+            CancellationTokenSource tokenSource = new CancellationTokenSource();
+            CommandListener server = new CommandListener();
+#pragma warning disable CS4014
+            server.WaitForConnections(tokenSource.Token);
+#pragma warning restore CS4014
             Console.WriteLine("Press enter to quit");
             Console.ReadLine();
-            server.EndWaitForConnections();
-            server.Disconnect();
+            Console.WriteLine("Quitting server...");
+            tokenSource.Cancel();
         }
     }
 }

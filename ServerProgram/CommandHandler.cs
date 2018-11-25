@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.Threading;
+using ServerProgram.Mappers;
+using System.Xml.Serialization;
+using ServerProgram.Entities;
+
+namespace ServerProgram
+{
+    class CommandHandler
+    {
+        public static async Task Run(Stream instream, Stream outstream)
+        {
+            Console.WriteLine("Message Received");
+            using (StreamReader _in = new StreamReader(instream))
+            {
+                string[] header = _in.ReadLine().Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                Task<string> body = _in.ReadToEndAsync();
+                switch (header[0])
+                {
+                    case "LOGIN": case "REGISTER":
+                        Login(outstream, (await body).Split('\n'), header[0] == "LOGIN");
+                        break;
+                }
+            }
+            Console.WriteLine("Connection Ended");
+        }
+
+        private static void Login(Stream outstream, string[] args, bool loggingIn)
+        {
+            for (int i = 0; i < args.Length; i++)
+                args[i] = args[i].Trim();
+            Account account = null;
+            if (loggingIn)
+                account = AccountMapper.ReadAccountByUserPass(args[0], args[1]);
+            else
+            {
+                // Make sure the student exists
+                if (int.TryParse(args[3], out int id) &&
+                    StudentMapper.ReadStudentByID(id) != null &&
+                    AccountMapper.ReadAccountByUserPass(args[1], args[2]) == null)
+                {
+                    account = new Account()
+                    {
+                        Username = args[0],
+                        Password = args[1],
+                        StudentID = id
+                    };
+                    AccountMapper.CreateAccount(account);
+                }
+            }
+
+            using (StreamWriter _out = new StreamWriter(outstream))
+            {
+                try
+                {
+                    if (account == null)
+                        _out.WriteLine("FAIL");
+                    else if (account.StudentID == null)
+                        _out.WriteLine("ADMIN");
+                    else
+                        _out.WriteLine("STUDENT");
+                    // _out.Flush();
+                }
+                catch (ObjectDisposedException)
+                { }
+            }
+        }
+    }
+}
