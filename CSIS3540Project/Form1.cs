@@ -14,7 +14,7 @@ namespace CSIS3540Project
     public partial class Form1 : Form
     {
         List<Student> studentsList = null;
-        List<Room> roomList = null;
+        List<DormRoom> roomList = null;
         DataTable studentsTable = new DataTable();
         DataTable roomsTable = new DataTable();
         DataView studentsView;
@@ -35,14 +35,14 @@ namespace CSIS3540Project
                 new Student{StudentID = 7, Name="Roger"}
             };
 
-            roomList = new List<Room>
+            roomList = new List<DormRoom>
             {
-                new Room{RoomID = 101, Size=1, StudentID=1},
-                new Room{RoomID = 102, Size=2, StudentID=2},
-                new Room{RoomID = 201, Size=1, StudentID=3},
-                new Room{RoomID = 202, Size=2, StudentID=4},
-                new Room{RoomID = 301, Size=1, StudentID=5},
-                new Room{RoomID = 302, Size=2, StudentID=6}
+                new DormRoom{RoomID = 101, Size=1},
+                new DormRoom{RoomID = 102, Size=2},
+                new DormRoom{RoomID = 201, Size=1},
+                new DormRoom{RoomID = 202, Size=2},
+                new DormRoom{RoomID = 301, Size=1},
+                new DormRoom{RoomID = 302, Size=2}
 
             };
 
@@ -103,17 +103,15 @@ namespace CSIS3540Project
             };
 
             var roomSizeColumn = new DataColumn("Size", typeof(int));
-            var stuIdColumn = new DataColumn("Student Id", typeof(int));
 
             roomsTable.Columns.AddRange
-                (new[] { roomIdColumn, roomSizeColumn, stuIdColumn });
+                (new[] { roomIdColumn, roomSizeColumn });
 
             foreach (var l in roomList)
             {
                 var newRow = roomsTable.NewRow();
                 newRow[0] = l.RoomID;
                 newRow[1] = l.Size;
-                newRow[2] = l.StudentID;
                 roomsTable.Rows.Add(newRow);
 
             }

@@ -25,9 +25,27 @@ namespace ServerProgram
                     case "LOGIN": case "REGISTER":
                         Login(outstream, (await body).Split('\n'), header[0] == "LOGIN");
                         break;
+                    case "AVAILABLE":
+                        Available(outstream, (await body).Split('\n'));
+                        break;
                 }
             }
+
             Console.WriteLine("Connection Ended");
+        }
+
+        private static void Available(Stream outstream, string[] args)
+        {
+            for (int i = 0; i < args.Length; i++)
+                args[i] = args[i].Trim();
+
+            List<DBEntities.DormRoom> rooms = new List<DBEntities.DormRoom>();
+            XmlSerializer ser = new XmlSerializer(typeof(List<DBEntities.DormRoom>));
+            using (StreamWriter _out = new StreamWriter(outstream))
+            {
+                _out.WriteLine("ROOMS");
+                ser.Serialize(_out, rooms);
+            }
         }
 
         private static void Login(Stream outstream, string[] args, bool loggingIn)
