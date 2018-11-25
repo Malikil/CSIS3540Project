@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ServerProgram.Mappers;
 using System.Threading;
 using ServerProgram.Seed;
+using ServerProgram.Entities;
 
 namespace ServerProgram
 {
@@ -24,7 +25,12 @@ namespace ServerProgram
             //seeder.SeedAccounts(); Ok
             //seeder.SeedBuildingAndFloor(); 
             //seeder.SeedDormRooms();
-            seeder.SeedReservations();
+            //seeder.SeedReservations();
+            List<Reservation> list = ReservationMapper.ReadResearvationsByAccount(313);
+            foreach(Reservation res in list)
+            {
+                Console.WriteLine($"{res.ResID}, {res.AccountID}, {res.RoomID}, {res.StartDate}, {res.EndDate}");
+            }
 
             Console.WriteLine("Press enter to quit");
             Console.ReadLine();
