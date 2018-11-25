@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ServerProgram.Mappers;
 using System.Threading;
 using ServerProgram.Seed;
+using ServerProgram.Entities;
 
 namespace ServerProgram
 {
