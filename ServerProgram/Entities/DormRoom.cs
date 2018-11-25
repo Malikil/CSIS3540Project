@@ -14,10 +14,9 @@ namespace ServerProgram.Entities
         public int RoomID { get; set; }
 
         public int Size { get; set; }
-
         public int Capacity { get; set; }
-
         public int FloorID { get; set; }
+        public int RoomNumber { get; set; }
 
         public virtual Floor Floor { get; set; }
 

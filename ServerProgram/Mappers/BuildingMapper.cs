@@ -9,7 +9,7 @@ namespace ServerProgram.Mappers
 {
     class BuildingMapper
     {
-        public void CreateBuilding(Building building)
+        public static void CreateBuilding(Building building)
         {
             var context = new CampusContext();
             context.Building.Add(building);

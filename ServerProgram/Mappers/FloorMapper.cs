@@ -9,7 +9,7 @@ namespace ServerProgram.Mappers
 {
     class FloorMapper
     {
-        public void CreateFloor(Floor floor)
+        public static void CreateFloor(Floor floor)
         {
             var context = new CampusContext();
             context.Floor.Add(floor);
