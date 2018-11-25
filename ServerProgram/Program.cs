@@ -17,6 +17,7 @@ namespace ServerProgram
             //seeder.SeedAccounts(); Ok
             //seeder.SeedBuildingAndFloor(); 
             //seeder.SeedDormRooms();
+            seeder.SeedReservations();
 
             ClientListener server = new ClientListener();
             server.BeginWaitForConnections();

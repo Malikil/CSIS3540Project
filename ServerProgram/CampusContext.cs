@@ -34,8 +34,9 @@ namespace ServerProgram
                 .IsUnicode(false);
 
             modelBuilder.Entity<Account>()
-                .HasOptional(e => e.Reservation)
-                .WithRequired(e => e.Account);
+                .HasMany(e => e.Reservations)
+                .WithRequired(e => e.Account)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Building>()
                 .Property(e => e.Name)
@@ -47,8 +48,9 @@ namespace ServerProgram
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DormRoom>()
-                .HasOptional(e => e.Reservation)
-                .WithRequired(e => e.DormRoom);
+                .HasMany(e => e.Reservations)
+                .WithRequired(e => e.DormRoom)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Floor>()
                 .HasMany(e => e.DormRooms)

@@ -22,6 +22,6 @@ namespace ServerProgram.Entities
 
         public virtual Student Student { get; set; }
 
-        public virtual Reservation Reservation{ get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

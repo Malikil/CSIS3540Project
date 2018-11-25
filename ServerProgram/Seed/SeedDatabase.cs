@@ -93,7 +93,19 @@ namespace ServerProgram.Seed
 
         public void SeedReservations()
         {
-
+            DateTime datetime = new DateTime(2018,01,10);
+            var startdate = datetime.ToShortDateString();
+            var enddate = datetime.AddDays(5).ToShortDateString();
+            Console.WriteLine(startdate);
+            Console.WriteLine(enddate);
+            Reservation res = new Reservation()
+            {
+                AccountID = 250,
+                RoomID = 4,
+                StartDate = datetime,
+                EndDate = datetime.AddDays(5)
+            };
+            ReservationMapper.CreateReservation(res);
         }
 
         public void SeedBuildingAndFloor()
