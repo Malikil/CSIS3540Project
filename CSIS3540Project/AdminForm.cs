@@ -38,16 +38,16 @@ namespace CSIS3540Project
                 new Student{StudentID = 7, Name="Roger"}
             };
 
-            roomList = new List<DormRoom>
-            {
-                new DormRoom{RoomID = 101, Size=1},
-                new DormRoom{RoomID = 102, Size=2},
-                new DormRoom{RoomID = 201, Size=1},
-                new DormRoom{RoomID = 202, Size=2},
-                new DormRoom{RoomID = 301, Size=1},
-                new DormRoom{RoomID = 302, Size=2}
+            //roomList = new List<DormRoom>
+            //{
+            //    new DormRoom{RoomID = 101, Size=1},
+            //    new DormRoom{RoomID = 102, Size=2},
+            //    new DormRoom{RoomID = 201, Size=1},
+            //    new DormRoom{RoomID = 202, Size=2},
+            //    new DormRoom{RoomID = 301, Size=1},
+            //    new DormRoom{RoomID = 302, Size=2}
 
-            };
+            //};
 
             CreateDataTable();
         }
@@ -104,18 +104,24 @@ namespace CSIS3540Project
             };
 
             var roomSizeColumn = new DataColumn("Size", typeof(int));
+            var roomCapacityColumn = new DataColumn("Capacity", typeof(int));
+            var roomFloorIdColumn = new DataColumn("FloorID", typeof(int));
+            var roomNumberColumn = new DataColumn("RoomNumber", typeof(int));
 
             roomsTable.Columns.AddRange
-                (new[] { roomIdColumn, roomSizeColumn });
+                (new[] { roomIdColumn, roomSizeColumn, roomCapacityColumn, roomFloorIdColumn, roomNumberColumn });
 
-            foreach (var l in roomList)
-            {
-                var newRow = roomsTable.NewRow();
-                newRow[0] = l.RoomID;
-                newRow[1] = l.Size;
-                roomsTable.Rows.Add(newRow);
+            //foreach (var l in roomList)
+            //{
+            //    var newRow = roomsTable.NewRow();
+            //    newRow[0] = l.RoomID;
+            //    newRow[1] = l.Size;
+            //    newRow[1] = l.Capacity;
+            //    newRow[1] = l.FloorID;
+            //    //[1] = l.RoomN;
+            //    roomsTable.Rows.Add(newRow);
 
-            }
+            //}
             roomsGridView.DataSource = roomsTable;
         }
 
@@ -155,11 +161,13 @@ namespace CSIS3540Project
             {
                 studentsGridView.DataSource = studentsTable;
             }
-            foreach (var l in roomList)
-            {
-                roomsGridView.DataSource = roomsTable;
-            }
+            //foreach (var l in roomList)
+            //{
+            //    roomsGridView.DataSource = roomsTable;
+            //}
         }
+
+
 
 
         #region send to server example
@@ -188,9 +196,11 @@ namespace CSIS3540Project
             {
                 string header = fromserver.ReadLine();
                 XmlSerializer serializer = new XmlSerializer(typeof(List<DormRoom>));
-                List<DormRoom> rooms = serializer.Deserialize(fromserver) as List<DormRoom>;
+                roomList = serializer.Deserialize(fromserver) as List<DormRoom>;
+
             }
             // Display data in grid view
+            roomsGridView.DataSource = roomList;
             // TODO
         }
         #endregion
@@ -214,7 +224,27 @@ namespace CSIS3540Project
 
         private void buttonInsert_Click_1(object sender, EventArgs e)
         {
+            NamedPipeClientStream instream = new NamedPipeClientStream(".", Program.PIPE_FROM_SERVER, PipeDirection.In);
+            NamedPipeClientStream outstream = new NamedPipeClientStream(".", Program.PIPE_TO_SERVER, PipeDirection.Out);
+            instream.Connect(2500);
+            outstream.Connect(2500);
+            // Send the required information to the server
+            using (StreamWriter toserver = new StreamWriter(outstream))
+            {
+                toserver.WriteLine("ROOM");
+                toserver.WriteLine(RoomSizeTextBox.Text);
+                toserver.WriteLine(roomCapacityTextBox.Text);
+                toserver.WriteLine(FloorIDTextBox.Text);
+                toserver.WriteLine(roomNumbertextBox.Text);
+            }
 
+            // Read the response elsewhere so the main thread isn't blocked
+            GetRoomList(instream);
+        }
+
+        private void buttonLoad_Click_1(object sender, EventArgs e)
+        {
+            
         }
 
         private void btnSearchStudent_Click(object sender, EventArgs e)
