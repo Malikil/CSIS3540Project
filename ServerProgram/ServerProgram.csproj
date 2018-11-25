@@ -55,8 +55,8 @@
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Building.cs" />
     <Compile Include="CampusContext.cs" />
-    <Compile Include="ClientHandler.cs" />
-    <Compile Include="ClientListener.cs" />
+    <Compile Include="CommandHandler.cs" />
+    <Compile Include="CommandListener.cs" />
     <Compile Include="Entities\DormRoom.cs" />
     <Compile Include="Entities\Floor.cs" />
     <Compile Include="Mappers\AccountMapper.cs" />

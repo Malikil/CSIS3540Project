@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DBEntities;
 
 namespace CSIS3540Project
 {
@@ -25,14 +26,13 @@ namespace CSIS3540Project
 
             studentsList = new List<Student>
             {
-                new Student{StudentID = 1, Name="Jhon", LastName="Parker", Age=19, CellNumber=7781235252, Email="j.parker@mail.com", Room=101},
-                new Student{StudentID = 2, Name="Diana", LastName="Jhones", Age=17, CellNumber=7784562585, Email="d.jhones@mail.com", Room=102},
-                new Student{StudentID = 3, Name="Jorge", LastName="Mesa", Age=18, CellNumber=7784561212, Email="j.mesa@mail.com", Room=201},
-                new Student{StudentID = 4, Name="Sammy", LastName="Liuten", Age=22, CellNumber=7787898585, Email="s.liuyen@mail.com", Room=202},
-                new Student{StudentID = 5, Name="Rachel", LastName="Tracy", Age=19, CellNumber=7781234552, Email="r.tracy@mail.com", Room=301},
-                new Student{StudentID = 6, Name="Sharyn", LastName="Tarazona", Age=18, CellNumber=7789635241, Email="s.tarazona@mail.com", Room=302},
-                new Student{StudentID = 7, Name="Roger", LastName="Torres", Age=18, CellNumber=7789635241, Email="s.tarazona@mail.com", Room=302}
-
+                new Student{StudentID = 1, Name="Jhon"},
+                new Student{StudentID = 2, Name="Diana"},
+                new Student{StudentID = 3, Name="Jorge"},
+                new Student{StudentID = 4, Name="Sammy"},
+                new Student{StudentID = 5, Name="Rachel"},
+                new Student{StudentID = 6, Name="Sharyn"},
+                new Student{StudentID = 7, Name="Roger"}
             };
 
             roomList = new List<Room>
@@ -76,25 +76,15 @@ namespace CSIS3540Project
             };
 
             var studentNameColumn = new DataColumn("Name", typeof(string));
-            var studentLastNameColumn = new DataColumn("Last Name", typeof(string));
-            var studentAgeColumn = new DataColumn("Age", typeof(int));
-            var studentPhoneColumn = new DataColumn("Phone Number", typeof(double));
-            var studentEmailColumn = new DataColumn("Email", typeof(string));
-            var studentRoomColumn = new DataColumn("Room", typeof(int));
 
             studentsTable.Columns.AddRange
-                (new[] { studentIdColumn, studentNameColumn, studentLastNameColumn, studentAgeColumn, studentPhoneColumn, studentEmailColumn, studentRoomColumn });
+                (new[] { studentIdColumn, studentNameColumn });
 
             foreach (var l in studentsList)
             {
                 var newRow = studentsTable.NewRow();
                 newRow[0] = l.StudentID;
                 newRow[1] = l.Name;
-                newRow[2] = l.LastName;
-                newRow[3] = l.Age;
-                newRow[4] = l.CellNumber;
-                newRow[5] = l.Email;
-                newRow[6] = l.Room;
                 studentsTable.Rows.Add(newRow);
 
             }
