@@ -21,6 +21,6 @@ namespace ServerProgram.Entities
 
         public virtual Floor Floor { get; set; }
 
-        public virtual ICollection<Reservation> Reservations { get; set; }
+        public virtual Reservation Reservation { get; set; }
     }
 }

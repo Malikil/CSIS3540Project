@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ServerProgram.Mappers;
+using ServerProgram.Seed;
 
 namespace ServerProgram
 {
@@ -11,6 +12,11 @@ namespace ServerProgram
     {
         static void Main(string[] args)
         {
+            SeedDatabase seeder = new SeedDatabase();
+            //seeder.SeedStudents();
+            //seeder.SeedAccounts(); Ok
+            seeder.SeedBuildingAndFloor(); 
+
             ClientListener server = new ClientListener();
             server.BeginWaitForConnections();
             Console.WriteLine("Press enter to quit");

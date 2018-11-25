@@ -22,18 +22,42 @@ namespace ServerProgram
         public virtual DbSet<DormRoom> DormRoom { get; set; }
         public virtual DbSet<Reservation> Reservation { get; set; }
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Student>().HasMany(e => e.Accounts).WithRequired(e => e.Student)
+            modelBuilder.Entity<Account>()
+                .Property(e => e.Username)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Account>()
+                .Property(e => e.Password)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Account>()
+                .HasOptional(e => e.Reservation)
+                .WithRequired(e => e.Account);
+
+            modelBuilder.Entity<Building>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Building>()
+                .HasMany(e => e.Floors)
+                .WithRequired(e => e.Building)
                 .WillCascadeOnDelete(false);
-            modelBuilder.Entity<Account>().HasMany(e => e.Reservations).WithRequired(e => e.Account)
+
+            modelBuilder.Entity<DormRoom>()
+                .HasOptional(e => e.Reservation)
+                .WithRequired(e => e.DormRoom);
+
+            modelBuilder.Entity<Floor>()
+                .HasMany(e => e.DormRooms)
+                .WithRequired(e => e.Floor)
                 .WillCascadeOnDelete(false);
-            modelBuilder.Entity<Building>().HasMany(e => e.Floors).WithRequired(e => e.Building)
-                .WillCascadeOnDelete(false);
-            modelBuilder.Entity<Floor>().HasMany(e => e.DormRooms).WithRequired(e => e.Floor)
-                .WillCascadeOnDelete(false);
-            modelBuilder.Entity<DormRoom>().HasMany(e => e.Reservations).WithRequired(e => e.DormRoom)
-                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Student>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
         }
     }
 }
