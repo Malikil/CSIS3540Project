@@ -11,7 +11,7 @@ using DBEntities;
 
 namespace CSIS3540Project
 {
-    public partial class Students : Form
+    public partial class AdminStudents : Form
     {
         List<Student> studentsList = null;
         List<DormRoom> roomList = null;
@@ -19,7 +19,8 @@ namespace CSIS3540Project
         DataTable roomsTable = new DataTable();
         DataView studentsView, roomsView;
         public int roomx;
-        public Students()
+
+        public AdminStudents()
         {
             InitializeComponent();
 
@@ -32,7 +33,6 @@ namespace CSIS3540Project
                 new Student{StudentID = 5, Name="Rachel"},
                 new Student{StudentID = 6, Name="Sharyn"},
                 new Student{StudentID = 7, Name="Roger"}
-
             };
 
             roomList = new List<DormRoom>
@@ -42,22 +42,24 @@ namespace CSIS3540Project
                 new DormRoom{RoomID = 201, Size=1},
                 new DormRoom{RoomID = 202, Size=2},
                 new DormRoom{RoomID = 301, Size=1},
-                new DormRoom{RoomID = 302, Size=2},
-                new DormRoom{RoomID = 303, Size=2}
+                new DormRoom{RoomID = 302, Size=2}
 
             };
 
             CreateDataTable();
+
+
         }
 
-        private void studentsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void roomsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int stuId;
+            int roomx;
             int index = e.RowIndex;
-            DataGridViewRow selectedRow = studentsGridView.Rows[index];
-            stuId = int.Parse(selectedRow.Cells[0].Value.ToString());
-           // labelStudendSelected.Text = stuId.ToString();
-            RoomsDataView(stuId);
+            DataGridViewRow selectedRow = roomsGridView.Rows[index];
+            roomx = int.Parse(selectedRow.Cells[0].Value.ToString());
+            label1.Text = roomx.ToString();
+            StudentsDataView(roomx);
+
 
         }
         public void CreateDataTable()
@@ -76,7 +78,7 @@ namespace CSIS3540Project
             var studentNameColumn = new DataColumn("Name", typeof(string));
 
             studentsTable.Columns.AddRange
-                (new[] { studentIdColumn, studentNameColumn});
+                (new[] { studentIdColumn, studentNameColumn });
 
             foreach (var l in studentsList)
             {
@@ -116,42 +118,48 @@ namespace CSIS3540Project
             roomsGridView.DataSource = roomsTable;
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
-        private void StudentsDataView(int StudentID)
+        private void StudentsDataView(int room)
         {
             //set the table that is used to construct this view
             studentsView = new DataView(studentsTable);
 
             //now configure the views using a filter
-            studentsView.RowFilter = $"StudentID = {StudentID} ";
+            studentsView.RowFilter = $"Room = {room} ";
 
             //bind the new grid
             studentsGridView.DataSource = studentsView;
         }
 
-        private void RoomsDataView(int Student)
+        private void RoomsDataView(int room)
         {
             //set the table that is used to construct this view
             roomsView = new DataView(roomsTable);
 
             //now configure the views using a filter
-            roomsView.RowFilter = $"StudentID = {Student} ";
+            roomsView.RowFilter = $"RoomID = {room} ";
 
             //bind the new grid
             roomsGridView.DataSource = roomsView;
         }
 
-        private void btnSearchStudent_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            int filter = int.Parse(studentsIdTextBoxSearch.Text);
-            StudentsDataView(filter);
+            Students studentsForm = new Students();
+            studentsForm.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonLoad_Click(object sender, EventArgs e)
         {
             foreach (var l in studentsList)
             {
@@ -165,31 +173,31 @@ namespace CSIS3540Project
 
         private void buttonInsert_Click(object sender, EventArgs e)
         {
-            string name = textBoxName.Text, lastname = textBoxLastname.Text, email = textBoxEmail.Text, room = textBoxRoom.Text;
-            int age = int.Parse(textBoxAge.Text), lenght = studentsList.Count(), last = lenght - 1, id = (studentsList[lenght - 1].StudentID) + 1;
-            double phone = double.Parse(textBoxPhone.Text);
+            int roomId = int.Parse(RoomIdTextBox.Text), size = int.Parse(SizeTextBox.Text), stuId = int.Parse(StuIdTextBox.Text);
+            int lenght = roomList.Count(), last = lenght - 1, id = (roomList[lenght - 1].StudentID) + 1;
+            roomList.Add(new Room { RoomID = roomId, Size = size, StudentID = stuId });
 
-            studentsList.Add(new Student { StudentID = id, Name = name});
+            var newRow = roomsTable.NewRow();
+            newRow[0] = roomList[lenght].RoomID;
+            newRow[1] = roomList[lenght].Size;
+            newRow[2] = roomList[lenght].StudentID;
 
-            var newRow = studentsTable.NewRow();
-            //newRow[0] = studentsList[last].StudentID;
-            newRow[1] = studentsList[lenght].Name;
-            studentsTable.Rows.Add(newRow);
+            roomsTable.Rows.Add(newRow);
 
-            studentsGridView.DataSource = studentsTable;
-            studentsTable.AcceptChanges();
+            roomsGridView.DataSource = roomsTable;
+            roomsTable.AcceptChanges();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void deleteButton_Click(object sender, EventArgs e)
         {
             try
             {
                 //find the correct row to delete
-                DataRow[] rowToDelete = studentsTable.Select($"StudentID={int.Parse(textBoxDelete.Text)}");
+                DataRow[] rowToDelete = roomsTable.Select($"RoomID={int.Parse(textBoxDelete.Text)}");
 
                 //delete the row
                 rowToDelete[0].Delete();
-                studentsTable.AcceptChanges();
+                roomsTable.AcceptChanges();
             }
             catch (Exception ex)
             {
@@ -197,5 +205,10 @@ namespace CSIS3540Project
             }
         }
 
+        private void btnSearchStudent_Click(object sender, EventArgs e)
+        {
+            int filter = int.Parse(roomIdTextBoxSearch.Text);
+            RoomsDataView(filter);
+        }
     }
 }
