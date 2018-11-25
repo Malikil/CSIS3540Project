@@ -25,7 +25,7 @@ namespace ServerProgram
             //seeder.SeedBuildingAndFloor(); 
             //seeder.SeedDormRooms();
             seeder.SeedReservations();
-            
+
             Console.WriteLine("Press enter to quit");
             Console.ReadLine();
             Console.WriteLine("Quitting server...");
