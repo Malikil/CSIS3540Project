@@ -94,7 +94,7 @@
             // deleteButton
             // 
             this.deleteButton.Location = new System.Drawing.Point(1369, 444);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(100, 28);
             this.deleteButton.TabIndex = 108;
@@ -127,7 +127,7 @@
             // 
             this.buttonLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLoad.Location = new System.Drawing.Point(1035, 619);
-            this.buttonLoad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonLoad.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(100, 28);
             this.buttonLoad.TabIndex = 105;
@@ -160,7 +160,7 @@
             // 
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.Location = new System.Drawing.Point(1358, 617);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 28);
             this.btnExit.TabIndex = 102;
@@ -180,7 +180,7 @@
             // textBoxDelete
             // 
             this.textBoxDelete.Location = new System.Drawing.Point(1219, 447);
-            this.textBoxDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxDelete.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxDelete.Name = "textBoxDelete";
             this.textBoxDelete.Size = new System.Drawing.Size(132, 22);
             this.textBoxDelete.TabIndex = 100;
@@ -198,7 +198,7 @@
             // roomIdTextBoxSearch
             // 
             this.roomIdTextBoxSearch.Location = new System.Drawing.Point(1217, 301);
-            this.roomIdTextBoxSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.roomIdTextBoxSearch.Margin = new System.Windows.Forms.Padding(4);
             this.roomIdTextBoxSearch.Name = "roomIdTextBoxSearch";
             this.roomIdTextBoxSearch.Size = new System.Drawing.Size(132, 22);
             this.roomIdTextBoxSearch.TabIndex = 98;
@@ -206,7 +206,7 @@
             // btnSearchStudent
             // 
             this.btnSearchStudent.Location = new System.Drawing.Point(1369, 299);
-            this.btnSearchStudent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSearchStudent.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearchStudent.Name = "btnSearchStudent";
             this.btnSearchStudent.Size = new System.Drawing.Size(100, 28);
             this.btnSearchStudent.TabIndex = 97;
@@ -257,7 +257,7 @@
             // SizeTextBox
             // 
             this.SizeTextBox.Location = new System.Drawing.Point(1290, 69);
-            this.SizeTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SizeTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.SizeTextBox.Name = "SizeTextBox";
             this.SizeTextBox.Size = new System.Drawing.Size(132, 22);
             this.SizeTextBox.TabIndex = 92;
@@ -265,7 +265,7 @@
             // StuIdTextBox
             // 
             this.StuIdTextBox.Location = new System.Drawing.Point(1050, 116);
-            this.StuIdTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.StuIdTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.StuIdTextBox.Name = "StuIdTextBox";
             this.StuIdTextBox.Size = new System.Drawing.Size(132, 22);
             this.StuIdTextBox.TabIndex = 91;
@@ -273,7 +273,7 @@
             // RoomIdTextBox
             // 
             this.RoomIdTextBox.Location = new System.Drawing.Point(1050, 69);
-            this.RoomIdTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RoomIdTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.RoomIdTextBox.Name = "RoomIdTextBox";
             this.RoomIdTextBox.Size = new System.Drawing.Size(132, 22);
             this.RoomIdTextBox.TabIndex = 90;
@@ -281,17 +281,18 @@
             // buttonInsert
             // 
             this.buttonInsert.Location = new System.Drawing.Point(1147, 166);
-            this.buttonInsert.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonInsert.Margin = new System.Windows.Forms.Padding(4);
             this.buttonInsert.Name = "buttonInsert";
             this.buttonInsert.Size = new System.Drawing.Size(100, 28);
             this.buttonInsert.TabIndex = 89;
             this.buttonInsert.Text = "Insert";
             this.buttonInsert.UseVisualStyleBackColor = true;
+            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click_1);
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(1201, 617);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 88;
@@ -302,7 +303,7 @@
             // 
             this.studentsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.studentsGridView.Location = new System.Drawing.Point(21, 391);
-            this.studentsGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentsGridView.Margin = new System.Windows.Forms.Padding(4);
             this.studentsGridView.Name = "studentsGridView";
             this.studentsGridView.Size = new System.Drawing.Size(876, 262);
             this.studentsGridView.TabIndex = 87;
@@ -311,7 +312,7 @@
             // 
             this.roomsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.roomsGridView.Location = new System.Drawing.Point(21, 67);
-            this.roomsGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.roomsGridView.Margin = new System.Windows.Forms.Padding(4);
             this.roomsGridView.Name = "roomsGridView";
             this.roomsGridView.Size = new System.Drawing.Size(876, 251);
             this.roomsGridView.TabIndex = 86;
@@ -668,14 +669,14 @@
             this.dataGridView2.Size = new System.Drawing.Size(928, 294);
             this.dataGridView2.TabIndex = 60;
             // 
-            // AdminRooms
+            // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1518, 703);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "AdminRooms";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "AdminForm";
             this.Text = "Administrator";
             ((System.ComponentModel.ISupportInitialize)(this.studentsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomsGridView)).EndInit();

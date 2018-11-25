@@ -39,9 +39,9 @@ Eric, Heitor, Roger, Kate
 ## Database Model
 * Accounts (**AccountID**, Username, Password, _StudentID_)
 * Students (**StudentID**, Name)
-* DormRooms (**RoomID**, Size, _FloorID_, Capacity)
-* Floors (**FloorID**, _BuildingID_, FloorNumber, FloorMap) *Possibly
-* Building (**BuildingID**, Name) *Possibly
+* DormRooms (**RoomID**, Size, _FloorID_, Capacity, RoomNumber)
+* Floors (**FloorID**, _BuildingID_, FloorNumber, FloorMap)
+* Building (**BuildingID**, Name)
 * Reservations (**ResID**, _AccountID_, _RoomID_, StartDate, EndDate)
 
 ## ER Diagram

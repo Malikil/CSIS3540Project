@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DBEntities;
+using System.IO.Pipes;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace CSIS3540Project
 {
@@ -141,11 +144,6 @@ namespace CSIS3540Project
             roomsGridView.DataSource = roomsView;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -163,10 +161,39 @@ namespace CSIS3540Project
             }
         }
 
+
+        #region send to server example
         private void buttonInsert_Click(object sender, EventArgs e)
         {
+            // Open a connection to the server
+            NamedPipeClientStream instream = new NamedPipeClientStream(".", Program.PIPE_FROM_SERVER, PipeDirection.In);
+            NamedPipeClientStream outstream = new NamedPipeClientStream(".", Program.PIPE_TO_SERVER, PipeDirection.Out);
+            instream.Connect(2500);
+            outstream.Connect(2500);
+            // Send the required information to the server
+            using (StreamWriter toserver = new StreamWriter(outstream))
+            {
+                toserver.WriteLine("ROOM");
+                //toserver.WriteLine(roomIdTextBoxSearch.Text);
+            }
 
+            // Read the response elsewhere so the main thread isn't blocked
+            GetRoomList(instream);
         }
+
+        private async Task GetRoomList(Stream instream)
+        {
+            // Read the response from the server
+            using (StreamReader fromserver = new StreamReader(instream))
+            {
+                string header = fromserver.ReadLine();
+                XmlSerializer serializer = new XmlSerializer(typeof(List<DormRoom>));
+                List<DormRoom> rooms = serializer.Deserialize(fromserver) as List<DormRoom>;
+            }
+            // Display data in grid view
+            // TODO
+        }
+        #endregion
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
@@ -183,6 +210,11 @@ namespace CSIS3540Project
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void buttonInsert_Click_1(object sender, EventArgs e)
+        {
+
         }
 
         private void btnSearchStudent_Click(object sender, EventArgs e)
