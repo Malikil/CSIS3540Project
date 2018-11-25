@@ -48,11 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="AdminRooms.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AdminRooms.Designer.cs">
+      <DependentUpon>AdminRooms.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -62,25 +62,34 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Students.cs">
+    <Compile Include="AdminStudents.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Students.Designer.cs">
-      <DependentUpon>Students.cs</DependentUpon>
+    <Compile Include="AdminStudents.Designer.cs">
+      <DependentUpon>AdminStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentsReservations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentsReservations.Designer.cs">
+      <DependentUpon>StudentsReservations.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="AdminRooms.resx">
+      <DependentUpon>AdminRooms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Students.resx">
-      <DependentUpon>Students.cs</DependentUpon>
+    <EmbeddedResource Include="AdminStudents.resx">
+      <DependentUpon>AdminStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentsReservations.resx">
+      <DependentUpon>StudentsReservations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
