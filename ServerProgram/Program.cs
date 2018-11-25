@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ServerProgram.Mappers;
 using System.Threading;
-using ServerProgram.Seed;
 using ServerProgram.Entities;
 
 namespace ServerProgram
@@ -19,14 +18,6 @@ namespace ServerProgram
 #pragma warning disable CS4014
             server.WaitForConnections(tokenSource.Token);
 #pragma warning restore CS4014
-
-            //SeedDatabase seeder = new SeedDatabase();
-            //seeder.SeedStudents();
-            //seeder.SeedAccounts(); Ok
-            //seeder.SeedBuildingAndFloor(); 
-            //seeder.SeedDormRooms();
-            //seeder.SeedReservations();
-            
             Console.WriteLine("Press enter to quit");
             Console.ReadLine();
             Console.WriteLine("Quitting server...");
