@@ -24,14 +24,6 @@ namespace ServerProgram.Mappers
                       select res;
             return list.ToList();
         }
-        /* 
-         Above call test
-         List<Reservation> list = ReservationMapper.ReadResearvationsByRoom(4);
-         foreach(Reservation res in list)
-         {
-             Console.WriteLine($"{res.ResID}, {res.AccountID}, {res.RoomID}, {res.StartDate}, {res.EndDate}");
-         }
-         */
       
         public static List<Reservation> ReadResearvationsByAccount(int accountid)
         {
