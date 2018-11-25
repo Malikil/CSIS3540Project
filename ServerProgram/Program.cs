@@ -19,12 +19,12 @@ namespace ServerProgram
             server.WaitForConnections(tokenSource.Token);
 #pragma warning restore CS4014
 
-            SeedDatabase seeder = new SeedDatabase();
+            //SeedDatabase seeder = new SeedDatabase();
             //seeder.SeedStudents();
             //seeder.SeedAccounts(); Ok
             //seeder.SeedBuildingAndFloor(); 
             //seeder.SeedDormRooms();
-            seeder.SeedReservations();
+            //seeder.SeedReservations();
             
             Console.WriteLine("Press enter to quit");
             Console.ReadLine();
