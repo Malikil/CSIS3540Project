@@ -7,11 +7,16 @@ using System.Windows.Forms;
 using System.IO.Pipes;
 using System.IO;
 using System.Xml.Serialization;
+using DBEntities;
 
 namespace CSIS3540Project
 {
     class Program
     {
+        //const string PIPE_SERVER_NAME = ".";
+        const string PIPE_FROM_SERVER = "ProjectServerOut";
+        const string PIPE_TO_SERVER = "ProjectServerIn";
+
         [STAThread]
         static void Main()
         {
@@ -27,8 +32,8 @@ namespace CSIS3540Project
                 ) // I suppose this is a tad unconventional, but w/e
             {
                 // Try to make connection
-                NamedPipeClientStream outstream = new NamedPipeClientStream(".", "ProjectServerIn", PipeDirection.Out);
-                NamedPipeClientStream instream = new NamedPipeClientStream(".", "ProjectServerOut", PipeDirection.In);
+                NamedPipeClientStream outstream = new NamedPipeClientStream(".", PIPE_TO_SERVER, PipeDirection.Out);
+                NamedPipeClientStream instream = new NamedPipeClientStream(".", PIPE_FROM_SERVER, PipeDirection.In);
                 try
                 {
                     outstream.Connect(3000);
@@ -55,6 +60,7 @@ namespace CSIS3540Project
                                 // Show admin form
 
                                 MessageBox.Show("Logged in as admin", "Logged in");
+
                                 //Application.Run(new AdminForm(toserver, fromserver));
                             }
                             else if (response == "STUDENT")
