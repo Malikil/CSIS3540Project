@@ -40,7 +40,7 @@ namespace ServerProgram.Mappers
         /// check number of reservations by account by date
         /// </summary>
         /// <param name="res"></param>
-        public static void CheckAccountResDates(Reservation res)
+        public static bool CheckAccountResDates(Reservation res)
         {
             //count people var
             int numRes = 0;
@@ -57,15 +57,17 @@ namespace ServerProgram.Mappers
                 numRes++;
 
             //if one conflicting res exists
-            if (numRes > 0)
-                Console.Out.WriteLine("you already have a room reservation between dates");
+            if (numRes == 0)
+                return true;
+            else
+                return false;
         }
 
         /// <summary>
         /// Check the capacity of the room by each day of the reservation period
         /// </summary>
         /// <param name="res"></param>
-        public static bool ValidateRoomReservation(Reservation res)
+        public static bool CheckRoomAvailability(Reservation res)
         {
             List<Reservation> list =  ReadResearvationsByRoom(res.RoomID);
 
@@ -89,6 +91,21 @@ namespace ServerProgram.Mappers
             }
 
             if (date == res.EndDate.AddDays(1))
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Calls the two validation methods and returns a boolean
+        /// </summary>
+        /// <param name="res"></param>
+        public static bool ValidateRoomReservation(Reservation res)
+        {
+            bool acc = CheckAccountResDates(res);
+            bool cap = CheckRoomAvailability(res);
+
+            if (acc == true && cap == true)
                 return true;
             else
                 return false;
