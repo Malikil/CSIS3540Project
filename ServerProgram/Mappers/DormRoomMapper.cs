@@ -35,7 +35,7 @@ namespace ServerProgram.Mappers
             return capacity.FirstOrDefault();
         }
 
-        public static List<DormRoom> GetAvailableRoomsByDate(DateTime start, DateTime end)
+        public static List<DBEntities.DormRoom> GetAvailableRoomsByDate(DateTime start, DateTime end)
         {
             var reserved = from room in context.DormRoom
                            join reservation in context.Reservation
@@ -43,7 +43,11 @@ namespace ServerProgram.Mappers
                                into reserves
                            from subres in reserves.DefaultIfEmpty()
                            where subres == null
-                           select room;
+                                || subres.StartDate > end
+                                || subres.EndDate < start
+                           select room.Simplify();
+            foreach (DBEntities.DormRoom room in reserved)
+                Console.WriteLine($"{room.RoomID}");
             return reserved.ToList();
         }
     }

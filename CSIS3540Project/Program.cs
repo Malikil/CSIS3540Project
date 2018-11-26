@@ -62,7 +62,7 @@ namespace CSIS3540Project
                             else if (response == "STUDENT")
                             {
                                 // Show student form
-                                MessageBox.Show("Logged in as student", "Logged in");
+                                Application.Run(new StudentsReservations());
                             }
                             else
                             {
@@ -93,7 +93,7 @@ namespace CSIS3540Project
 
                         if (response == "STUDENT") // Account created
                         {
-                            MessageBox.Show("Logged in as student");
+                            Application.Run(new StudentsReservations());
                         }
                         else // Account not created
                         {
