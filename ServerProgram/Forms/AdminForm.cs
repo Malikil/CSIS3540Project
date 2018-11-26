@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DBEntities;
-using System.IO.Pipes;
-using System.IO;
-using System.Xml.Serialization;
+//using DBEntities;
+using ServerProgram.Mappers;
+using ServerProgram.Entities;
+//using System.IO.Pipes;
+//using System.IO;
+//using System.Xml.Serialization;
 
 namespace ServerProgram.Forms
 {
@@ -49,7 +51,7 @@ namespace ServerProgram.Forms
 
             //};
 
-            CreateDataTable();
+            //CreateDataTable();
         }
 
         private void roomsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -65,31 +67,31 @@ namespace ServerProgram.Forms
         }
         public void CreateDataTable()
         {
-            var studentIdColumn = new DataColumn("StudentID", typeof(int))
-            {
-                Caption = "Student Id",
-                ReadOnly = true,
-                AllowDBNull = false,
-                Unique = true,
-                AutoIncrement = true,
-                AutoIncrementSeed = 1,
-                AutoIncrementStep = 1,
-            };
+            //var studentIdColumn = new DataColumn("StudentID", typeof(int))
+            //{
+            //    Caption = "Student Id",
+            //    ReadOnly = true,
+            //    AllowDBNull = false,
+            //    Unique = true,
+            //    AutoIncrement = true,
+            //    AutoIncrementSeed = 1,
+            //    AutoIncrementStep = 1,
+            //};
 
-            var studentNameColumn = new DataColumn("Name", typeof(string));
+            //var studentNameColumn = new DataColumn("Name", typeof(string));
 
-            studentsTable.Columns.AddRange
-                (new[] { studentIdColumn, studentNameColumn });
+            //studentsTable.Columns.AddRange
+            //    (new[] { studentIdColumn, studentNameColumn });
 
-            foreach (var l in studentsList)
-            {
-                var newRow = studentsTable.NewRow();
-                newRow[0] = l.StudentID;
-                newRow[1] = l.Name;
-                studentsTable.Rows.Add(newRow);
+            //foreach (var l in studentsList)
+            //{
+            //    var newRow = studentsTable.NewRow();
+            //    newRow[0] = l.StudentID;
+            //    newRow[1] = l.Name;
+            //    studentsTable.Rows.Add(newRow);
 
-            }
-            studentsGridView.DataSource = studentsTable;
+            //}
+            //studentsGridView.DataSource = studentsTable;
 
 
             var roomIdColumn = new DataColumn("RoomID", typeof(int))
@@ -111,17 +113,17 @@ namespace ServerProgram.Forms
             roomsTable.Columns.AddRange
                 (new[] { roomIdColumn, roomSizeColumn, roomCapacityColumn, roomFloorIdColumn, roomNumberColumn });
 
-            //foreach (var l in roomList)
-            //{
-            //    var newRow = roomsTable.NewRow();
-            //    newRow[0] = l.RoomID;
-            //    newRow[1] = l.Size;
-            //    newRow[1] = l.Capacity;
-            //    newRow[1] = l.FloorID;
-            //    //[1] = l.RoomN;
-            //    roomsTable.Rows.Add(newRow);
+            foreach (var l in roomList)
+            {
+                var newRow = roomsTable.NewRow();
+                newRow[0] = l.RoomID;
+                newRow[1] = l.Size;
+                newRow[2] = l.Capacity;
+                newRow[3] = l.FloorID;
+                newRow[4] = l.RoomNumber;
+                roomsTable.Rows.Add(newRow);
 
-            //}
+            }
             roomsGridView.DataSource = roomsTable;
         }
 
@@ -173,38 +175,12 @@ namespace ServerProgram.Forms
         #region send to server example
         private void buttonInsert_Click_1(object sender, EventArgs e)
         {
-            NamedPipeClientStream instream = new NamedPipeClientStream(".", Program.PIPE_FROM_SERVER, PipeDirection.In);
-            NamedPipeClientStream outstream = new NamedPipeClientStream(".", Program.PIPE_TO_SERVER, PipeDirection.Out);
-            instream.Connect(2500);
-            outstream.Connect(2500);
-            // Send the required information to the server
-            using (StreamWriter toserver = new StreamWriter(outstream))
-            {
-                toserver.WriteLine("ROOM");
-                //toserver.WriteLine(RoomSizeTextBox.Text);
-                //toserver.WriteLine(roomCapacityTextBox.Text);
-                //toserver.WriteLine(FloorIDTextBox.Text);
-                //toserver.WriteLine(roomNumbertextBox.Text);
-            }
+            roomList = new List<DormRoom>(DormRoomMapper.ReadAllRooms());
+            CreateDataTable();
 
-            // Read the response elsewhere so the main thread isn't blocked
-            GetRoomList(instream);
         }
 
-        private async Task GetRoomList(Stream instream)
-        {
-            // Read the response from the server
-            using (StreamReader fromserver = new StreamReader(instream))
-            {
-                string header = fromserver.ReadLine();
-                XmlSerializer serializer = new XmlSerializer(typeof(List<DormRoom>));
-                roomList = serializer.Deserialize(fromserver) as List<DormRoom>;
-
-            }
-            // Display data in grid view
-            roomsGridView.DataSource = roomList;
-            // TODO
-        }
+        
         #endregion
 
         private void deleteButton_Click(object sender, EventArgs e)
