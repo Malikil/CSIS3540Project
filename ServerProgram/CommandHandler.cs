@@ -42,8 +42,8 @@ namespace ServerProgram
             DateTime start = DateTime.Parse(args[0]);
             DateTime end = DateTime.Parse(args[1]);
 
-            List<DBEntities.DormRoom> rooms = DormRoomMapper.GetAvailableRoomsByDate(start, end);
-            XmlSerializer ser = new XmlSerializer(typeof(List<DBEntities.DormRoom>));
+            List<DormRoom> rooms = DormRoomMapper.GetAvailableRoomsByDate(start, end);
+            XmlSerializer ser = new XmlSerializer(typeof(List<DormRoom>));
             using (StreamWriter _out = new StreamWriter(outstream))
             {
                 _out.WriteLine("ROOMS");
