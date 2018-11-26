@@ -39,9 +39,22 @@ Message body will contain the information to be added to table in xml format.
     REMOVE Student
     [studentid]
 
+#### Get all rooms
+When an admin wants to get a list of every room, just send the header `ROOMS` with an empty body
+
 ### Student Messages
 #### Get available rooms
+To get a list of rooms that are available from the server during a date range, send the beginning date and end date to the server with the `AVAILABLE` header
+
     AVAILABLE
+    [StartDate]
+    [EndDate]
+
+#### Reserve room
+When the user has made their selection of room and dates, they need to tell the server they want to reserve it. Use the `RESERVE` header, the room id, and the date range
+
+    RESERVE
+    [RoomID]
     [StartDate]
     [EndDate]
 
@@ -54,12 +67,23 @@ Respond with account type. No message body needs to be sent.
 
 ### Admin responses
 #### ROOMS
-When the admin requests a list of rooms, the server will need to send the table. I'm thinking just the table, could be in xml format for clarity, or we could make some sort of compression algorithm in an attempt to keep the streams from working too hard.
+When the admin requests a list of rooms, the server will send an xml of a `List<DormRoom>` with a `ROOMS` header
+
+    ROOMS
+    <roomlist>          <-- or whatever the xml serializer does to serialize a list
+        <room 1></room 1>
+        <room 2></room 2>
+    </roomlist>
+
+#### ADD
+When adding a room, the server will respond with `SUCCESS` or `FAIL` depending on whether the room was added or not
 
 ### Student responses
-#### ROOMS
+#### AVAILABLE
 When given a start date and end date, will send rooms that are available during those dates.
 
     ROOMS
     [xml of List<DormRoom>]
 
+#### RESERVE
+When the student reserves a room, the server will respond with either `SUCCESS` or `FAIL` for if the room was able to be reserved.
