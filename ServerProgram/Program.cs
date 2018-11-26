@@ -20,17 +20,21 @@ namespace ServerProgram
             server.WaitForConnections(tokenSource.Token);
 #pragma warning restore CS4014
 
-            SeedDatabase seeder = new SeedDatabase();
-            //seeder.SeedStudents();
-            //seeder.SeedAccounts(); Ok
-            //seeder.SeedBuildingAndFloor(); 
-            //seeder.SeedDormRooms();
-            //seeder.SeedReservations();
-            List<Reservation> list = ReservationMapper.ReadResearvationsByAccount(313);
-            foreach(Reservation res in list)
+            // Reservation Validation Test
+            /*DateTime datetime = new DateTime(2018, 01, 29);
+            Reservation res = new Reservation()
             {
-                Console.WriteLine($"{res.ResID}, {res.AccountID}, {res.RoomID}, {res.StartDate}, {res.EndDate}");
-            }
+                AccountID = 250,
+                RoomID = 4,
+                StartDate = datetime,
+                EndDate = datetime.AddDays(9)
+            };
+
+            //ReservationMapper.ValidateReservation(res);
+            //ReservationMapper.CheckPeopleDates(res);
+            bool b = ReservationMapper.ValidateRoomReservation(res);
+            Console.WriteLine(b.ToString());
+            */
 
             Console.WriteLine("Press enter to quit");
             Console.ReadLine();

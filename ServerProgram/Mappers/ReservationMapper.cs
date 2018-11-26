@@ -17,6 +17,9 @@ namespace ServerProgram.Mappers
             context.SaveChanges();
         }
 
+        // TODO 
+        // Get available rooms by date
+
         public static List<Reservation> ReadResearvationsByRoom(int roomid)
         {
             var list = from res in context.Reservation
@@ -24,14 +27,6 @@ namespace ServerProgram.Mappers
                       select res;
             return list.ToList();
         }
-        /* 
-         Above call test
-         List<Reservation> list = ReservationMapper.ReadResearvationsByRoom(4);
-         foreach(Reservation res in list)
-         {
-             Console.WriteLine($"{res.ResID}, {res.AccountID}, {res.RoomID}, {res.StartDate}, {res.EndDate}");
-         }
-         */
       
         public static List<Reservation> ReadResearvationsByAccount(int accountid)
         {
@@ -39,6 +34,86 @@ namespace ServerProgram.Mappers
                        where res.AccountID == accountid
                        select res;
             return list.ToList();
+        }
+
+        /// <summary>
+        /// check number of reservations by account by date
+        /// </summary>
+        /// <param name="res"></param>
+        public static void CheckAccountResDates(Reservation res)
+        {
+            //count people var
+            int numRes = 0;
+
+            //linq to check accout date res
+            var people = from dbReservation in context.Reservation
+                         where res.StartDate >= dbReservation.StartDate 
+                         && res.EndDate <= dbReservation.EndDate 
+                         && res.AccountID == dbReservation.AccountID
+                         select dbReservation;
+
+            //increment per res
+            foreach (Reservation p in people)
+                numRes++;
+
+            //if one conflicting res exists
+            if (numRes > 0)
+                Console.Out.WriteLine("you already have a room reservation between dates");
+        }
+
+        /// <summary>
+        /// Check the capacity of the room by each day of the reservation period
+        /// </summary>
+        /// <param name="res"></param>
+        public static bool ValidateRoomReservation(Reservation res)
+        {
+            List<Reservation> list =  ReadResearvationsByRoom(res.RoomID);
+
+            // loop each date starting for res.startdate
+            DateTime date = res.StartDate;
+            while(date <= res.EndDate)
+            {
+                // check how many reservations exist in the date
+                int numRes = CheckReservationsByDateAndRoom(res.RoomID ,date);
+
+                // If capacity is bigger than the number of reservations 
+                //for the specific date
+                int cap = DormRoomMapper.GetRoomCapacityByID(res.RoomID);
+                if (cap > numRes)
+                {
+                    date = date.AddDays(1);
+                    continue;
+                }
+                else
+                    return false;
+            }
+
+            if (date == res.EndDate.AddDays(1))
+                return true;
+            else
+                return false;
+        }
+
+
+        /// <summary>
+        /// Check the number of reservations per room by a specific day 
+        /// </summary>
+        /// <param name="roomid"></param>
+        /// /// <param name="date"></param>
+        public static int CheckReservationsByDateAndRoom(int roomid, DateTime date)
+        {
+            int res = 0;
+
+            var reservations = from dbReservation in context.Reservation
+                         where date >= dbReservation.StartDate
+                         && date <= dbReservation.EndDate
+                         && roomid == dbReservation.RoomID
+                         select dbReservation;
+
+            foreach (Reservation p in reservations)
+                res++;
+
+            return res;
         }
     }
 }
