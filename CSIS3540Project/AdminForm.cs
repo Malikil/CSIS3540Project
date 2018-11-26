@@ -17,7 +17,7 @@ namespace CSIS3540Project
     public partial class AdminForm : Form
     {
         List<Student> studentsList = null;
-        List<DormRoom> roomList = null;
+        private List<DormRoom> roomList = null;
         DataTable studentsTable = new DataTable();
         DataTable roomsTable = new DataTable();
         DataView studentsView, roomsView;
@@ -181,10 +181,10 @@ namespace CSIS3540Project
             using (StreamWriter toserver = new StreamWriter(outstream))
             {
                 toserver.WriteLine("ROOM");
-                toserver.WriteLine(RoomSizeTextBox.Text);
-                toserver.WriteLine(roomCapacityTextBox.Text);
-                toserver.WriteLine(FloorIDTextBox.Text);
-                toserver.WriteLine(roomNumbertextBox.Text);
+                //toserver.WriteLine(RoomSizeTextBox.Text);
+                //toserver.WriteLine(roomCapacityTextBox.Text);
+                //toserver.WriteLine(FloorIDTextBox.Text);
+                //toserver.WriteLine(roomNumbertextBox.Text);
             }
 
             // Read the response elsewhere so the main thread isn't blocked
