@@ -39,7 +39,7 @@
             this.textBoxDelete = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.roomIdTextBoxSearch = new System.Windows.Forms.TextBox();
-            this.btnSearchStudent = new System.Windows.Forms.Button();
+            this.btnSearchRoom = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -53,6 +53,8 @@
             this.roomsGridView = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.roomTab = new System.Windows.Forms.TabPage();
+            this.roomNumbertextBox = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.studentTab = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -82,8 +84,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.roomNumbertextBox = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.studentsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomsGridView)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -169,6 +170,7 @@
             this.btnExit.TabIndex = 102;
             this.btnExit.Text = "EXIT";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
             // 
             // label3
             // 
@@ -206,15 +208,16 @@
             this.roomIdTextBoxSearch.Size = new System.Drawing.Size(148, 26);
             this.roomIdTextBoxSearch.TabIndex = 98;
             // 
-            // btnSearchStudent
+            // btnSearchRoom
             // 
-            this.btnSearchStudent.Location = new System.Drawing.Point(1540, 374);
-            this.btnSearchStudent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnSearchStudent.Name = "btnSearchStudent";
-            this.btnSearchStudent.Size = new System.Drawing.Size(112, 35);
-            this.btnSearchStudent.TabIndex = 97;
-            this.btnSearchStudent.Text = "Search";
-            this.btnSearchStudent.UseVisualStyleBackColor = true;
+            this.btnSearchRoom.Location = new System.Drawing.Point(1540, 374);
+            this.btnSearchRoom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnSearchRoom.Name = "btnSearchRoom";
+            this.btnSearchRoom.Size = new System.Drawing.Size(112, 35);
+            this.btnSearchRoom.TabIndex = 97;
+            this.btnSearchRoom.Text = "Search";
+            this.btnSearchRoom.UseVisualStyleBackColor = true;
+            this.btnSearchRoom.Click += new System.EventHandler(this.btnSearchStudent_Click_1);
             // 
             // label14
             // 
@@ -334,6 +337,7 @@
             // 
             // roomTab
             // 
+            this.roomTab.Controls.Add(this.label25);
             this.roomTab.Controls.Add(this.roomNumbertextBox);
             this.roomTab.Controls.Add(this.label24);
             this.roomTab.Controls.Add(this.roomsGridView);
@@ -358,7 +362,7 @@
             this.roomTab.Controls.Add(this.label2);
             this.roomTab.Controls.Add(this.label14);
             this.roomTab.Controls.Add(this.roomIdTextBoxSearch);
-            this.roomTab.Controls.Add(this.btnSearchStudent);
+            this.roomTab.Controls.Add(this.btnSearchRoom);
             this.roomTab.Location = new System.Drawing.Point(4, 29);
             this.roomTab.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.roomTab.Name = "roomTab";
@@ -367,6 +371,24 @@
             this.roomTab.TabIndex = 0;
             this.roomTab.Text = "Rooms";
             this.roomTab.UseVisualStyleBackColor = true;
+            // 
+            // roomNumbertextBox
+            // 
+            this.roomNumbertextBox.Location = new System.Drawing.Point(1451, 143);
+            this.roomNumbertextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.roomNumbertextBox.Name = "roomNumbertextBox";
+            this.roomNumbertextBox.Size = new System.Drawing.Size(148, 26);
+            this.roomNumbertextBox.TabIndex = 109;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(1337, 146);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(116, 20);
+            this.label24.TabIndex = 110;
+            this.label24.Text = "Room Number:";
             // 
             // studentTab
             // 
@@ -677,23 +699,15 @@
             this.dataGridView2.Size = new System.Drawing.Size(1044, 368);
             this.dataGridView2.TabIndex = 60;
             // 
-            // roomNumbertextBox
+            // label25
             // 
-            this.roomNumbertextBox.Location = new System.Drawing.Point(1451, 143);
-            this.roomNumbertextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.roomNumbertextBox.Name = "roomNumbertextBox";
-            this.roomNumbertextBox.Size = new System.Drawing.Size(148, 26);
-            this.roomNumbertextBox.TabIndex = 109;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(1337, 146);
-            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(116, 20);
-            this.label24.TabIndex = 110;
-            this.label24.Text = "Room Number:";
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(1126, 258);
+            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(67, 20);
+            this.label25.TabIndex = 111;
+            this.label25.Text = "Floor Id:";
             // 
             // AdminForm
             // 
@@ -730,7 +744,7 @@
         private System.Windows.Forms.TextBox textBoxDelete;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox roomIdTextBoxSearch;
-        private System.Windows.Forms.Button btnSearchStudent;
+        private System.Windows.Forms.Button btnSearchRoom;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
@@ -775,6 +789,7 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.TextBox roomNumbertextBox;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
     }
 }
 

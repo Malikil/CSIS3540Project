@@ -23,6 +23,7 @@ namespace ServerProgram.Forms
         DataTable studentsTable = new DataTable();
         DataTable roomsTable = new DataTable();
         DataView studentsView, roomsView;
+        int lastRoomID, lastRoomNumber;
         public int roomx;
 
         public AdminForm()
@@ -39,6 +40,9 @@ namespace ServerProgram.Forms
                 new Student{StudentID = 6, Name="Sharyn"},
                 new Student{StudentID = 7, Name="Roger"}
             };
+            roomList = new List<DormRoom>(DormRoomMapper.ReadAllRooms());
+            lastRoomID = roomList.Last().RoomID;
+            label25.Text = lastRoomID.ToString();
 
             //roomList = new List<DormRoom>
             //{
@@ -51,7 +55,7 @@ namespace ServerProgram.Forms
 
             //};
 
-            //CreateDataTable();
+            CreateDataTable();
         }
 
         private void roomsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -95,15 +99,16 @@ namespace ServerProgram.Forms
 
 
             var roomIdColumn = new DataColumn("RoomID", typeof(int))
-            {
-                Caption = "Romm Id",
-                ReadOnly = true,
-                AllowDBNull = false,
-                Unique = true,
-                AutoIncrement = true,
-                AutoIncrementSeed = 1,
-                AutoIncrementStep = 1,
-            };
+            //{
+            //    Caption = "Romm Id",
+            //    ReadOnly = true,
+            //    AllowDBNull = false,
+            //    Unique = true,
+            //    AutoIncrement = true,
+            //    AutoIncrementSeed = 1,
+            //    AutoIncrementStep = 1,
+            //}
+            ;
 
             var roomSizeColumn = new DataColumn("Size", typeof(int));
             var roomCapacityColumn = new DataColumn("Capacity", typeof(int));
@@ -171,8 +176,22 @@ namespace ServerProgram.Forms
 
         private void buttonInsert_Click_1(object sender, EventArgs e)
         {
-            roomList = new List<DormRoom>(DormRoomMapper.ReadAllRooms());
-            CreateDataTable();
+            //roomList = new List<DormRoom>(DormRoomMapper.ReadAllRooms());
+            //CreateDataTable();
+
+            
+            
+            DormRoom newRoom = new DormRoom();
+            //roomList.Add(newRoom.RoomID)
+            newRoom.RoomID = lastRoomID + 1;
+            newRoom.Size = int.Parse(RoomSizeTextBox.Text);
+            newRoom.Capacity = int.Parse(roomCapacityTextBox.Text);
+            newRoom.FloorID = int.Parse(FloorIDTextBox.Text);
+            newRoom.RoomNumber = int.Parse(roomNumbertextBox.Text);
+
+            DormRoomMapper.CreateDormRoom(newRoom);
+            roomsTable.AcceptChanges();
+            roomsGridView.DataSource = roomsTable;
 
         }
 
@@ -193,17 +212,21 @@ namespace ServerProgram.Forms
             }
         }
 
-        
+        private void btnExit_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSearchStudent_Click_1(object sender, EventArgs e)
+        {
+            int filter = int.Parse(roomIdTextBoxSearch.Text);
+            RoomsDataView(filter);
+        }
 
         private void buttonLoad_Click_1(object sender, EventArgs e)
         {
             
         }
 
-        private void btnSearchStudent_Click(object sender, EventArgs e)
-        {
-            int filter = int.Parse(roomIdTextBoxSearch.Text);
-            RoomsDataView(filter);
-        }
     }
 }
