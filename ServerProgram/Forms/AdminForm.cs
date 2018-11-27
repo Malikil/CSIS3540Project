@@ -169,19 +169,12 @@ namespace ServerProgram.Forms
             //}
         }
 
-
-
-
-        #region send to server example
         private void buttonInsert_Click_1(object sender, EventArgs e)
         {
             roomList = new List<DormRoom>(DormRoomMapper.ReadAllRooms());
             CreateDataTable();
 
         }
-
-        
-        #endregion
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
