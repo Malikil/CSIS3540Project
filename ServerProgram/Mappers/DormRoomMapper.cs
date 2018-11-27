@@ -18,6 +18,12 @@ namespace ServerProgram.Mappers
             context.SaveChanges();
         }
 
+        public static void DeleteDormRoom(DormRoom room)
+        {
+            //context.DormRoom.Remove();
+            context.SaveChanges();
+        }
+
         public static List<DormRoom> ReadAllRooms()
         {
             return context.DormRoom.ToList();
