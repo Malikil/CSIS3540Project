@@ -36,7 +36,7 @@ namespace ServerProgram
             modelBuilder.Entity<Account>()
                 .HasMany(e => e.Reservations)
                 .WithRequired(e => e.Account)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Building>()
                 .Property(e => e.Name)
@@ -45,21 +45,27 @@ namespace ServerProgram
             modelBuilder.Entity<Building>()
                 .HasMany(e => e.Floors)
                 .WithRequired(e => e.Building)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<DormRoom>()
                 .HasMany(e => e.Reservations)
                 .WithRequired(e => e.DormRoom)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Floor>()
                 .HasMany(e => e.DormRooms)
                 .WithRequired(e => e.Floor)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Student>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Student>()
+                .HasMany(e => e.Accounts)
+                .WithRequired(e => e.Student)
+                .WillCascadeOnDelete(true);
         }
+
     }
 }

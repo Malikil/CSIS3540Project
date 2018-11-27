@@ -94,10 +94,10 @@ namespace ServerProgram.Forms
 
         private void SearchStudentButtonClicked(object sender, EventArgs e)
         {
-            //if (int.TryParse(roomIdTextBoxSearch.Text, out int roomid))
-                
-            //UpdateStudentsFromRoomList(StudentMapper.ReadAllStudents(ReservationMapper.GetStudentByRoom(roomid)));
-
+            if (int.TryParse(roomIdTextBoxSearch.Text, out int roomid))
+            {
+                UpdateStudentsFromRoomList(ReservationMapper.ReadStudentsByRoom(roomid));
+            }
         }
     }
 }
