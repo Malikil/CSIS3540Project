@@ -18,8 +18,10 @@ namespace ServerProgram.Forms
 {
     public partial class AdminForm : Form
     {
-        public AdminForm()
+        private readonly int AccountID;
+        public AdminForm(int accid)
         {
+            AccountID = accid;
             InitializeComponent();
         }
 

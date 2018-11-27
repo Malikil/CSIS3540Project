@@ -18,6 +18,13 @@ namespace ServerProgram.Mappers
             context.SaveChanges();
         }
 
+        public static DormRoom GetRoomByID(int id)
+        {
+            return (from room in context.DormRoom
+                    where room.RoomID == id
+                    select room).FirstOrDefault();
+        }
+
         public static void DeleteDormRoomByID(int roomid)
         {
             var rooms = from r in context.DormRoom

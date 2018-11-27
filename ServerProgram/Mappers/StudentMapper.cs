@@ -34,12 +34,23 @@ namespace ServerProgram.Mappers
 
         public static void DeleteStudentByID(int studentid)
         {
-            var students = from s in context.Student
-                        where s.StudentID == studentid
-                        select s;
-            Student student = students.FirstOrDefault();
+            // Cascade doesn't seem to be working, so need to do it manually
+            // First delete all reservations
+            var student = (from s in context.Student
+                           where s.StudentID == studentid
+                           select s).FirstOrDefault();
             if (student != null)
             {
+                Account[] accounts = new Account[student.Accounts.Count];
+                student.Accounts.CopyTo(accounts, 0);
+                foreach (Account a in accounts)
+                {
+                    Reservation[] reservations = new Reservation[a.Reservations.Count];
+                    a.Reservations.CopyTo(reservations, 0);
+                    foreach (Reservation r in reservations)
+                        context.Reservation.Remove(r);
+                    context.Account.Remove(a);
+                }
                 context.Student.Remove(student);
                 context.SaveChanges();
             }

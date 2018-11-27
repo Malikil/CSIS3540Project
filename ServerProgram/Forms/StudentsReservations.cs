@@ -17,42 +17,52 @@ namespace ServerProgram.Forms
 {
     public partial class StudentsReservations : Form
     {
-        
-        public StudentsReservations()
+        private readonly int AccountID;
+
+        private DateTime startDate = DateTime.MinValue;
+        private DateTime endDate = DateTime.MinValue;
+
+        public StudentsReservations(int accid)
         {
+            AccountID = accid;
             InitializeComponent();
         }
 
         private void GetAvailabilityFromServer_EventHandler(object sender, EventArgs e)
         {
-            label1.Text = dateTimePicker1.Value.ToString("yyyy-MM-dd");
-            label2.Text = dateTimePicker2.Value.ToString("yyyy-MM-dd");
+            label1.Text = startPicker.Value.ToString("yyyy-MM-dd");
+            label2.Text = endPicker.Value.ToString("yyyy-MM-dd");
 
-            List<DormRoom> rooms = DormRoomMapper.GetAvailableRoomsByDate(dateTimePicker1.Value, dateTimePicker2.Value);
+            startDate = startPicker.Value.Date;
+            endDate = endPicker.Value.Date.AddHours(1);
+
+            List<DormRoom> rooms = DormRoomMapper.GetAvailableRoomsByDate(startDate, endDate);
             dataGridView1.DataSource = rooms;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Reservation newReservation = new Reservation()
-            {
-                RoomID = int.Parse(textBoxRoomID.Text),
-                AccountID = int.Parse(textBoxAccountID.Text),
-                StartDate = dateTimePicker1.Value,
-                EndDate = dateTimePicker2.Value
+            Reservation newReservation = null;
+            if (int.TryParse(textBoxRoomID.Text, out int rid)
+                && startDate != DateTime.MinValue
+                && endDate != DateTime.MinValue)
+                newReservation = new Reservation()
+                {
+                    RoomID = rid,
+                    AccountID = AccountID,
+                    StartDate = startDate,
+                    EndDate = endDate
+                };
 
-            };
-
-            bool validation = ReservationMapper.ValidateRoomReservation(newReservation);
-            if (validation)
+            if (newReservation == null)
+                MessageBox.Show("Invalid room id or dates not set", "Invalid");
+            else if (ReservationMapper.ValidateRoomReservation(newReservation))
             {
                 ReservationMapper.CreateReservation(newReservation);
+                MessageBox.Show($"Reservation Created with ID {newReservation.ResID}", "Success");
             }
             else
-            {
-                ReservationMapper.CreateReservation(newReservation);
-                MessageBox.Show("Try again");
-            }
+                MessageBox.Show("Reservation conflicts with existing reservation(s)", "Schedule Conflict");
         }
     }
 }

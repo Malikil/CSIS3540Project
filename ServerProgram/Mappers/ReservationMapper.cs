@@ -39,28 +39,18 @@ namespace ServerProgram.Mappers
         /// <summary>
         /// check number of reservations by account by date
         /// </summary>
-        /// <param name="res"></param>
-        public static bool CheckAccountResDates(Reservation res)
+        /// <param name="requested"></param>
+        public static bool CheckAccountResDates(Reservation requested)
         {
-            //count people var
-            int numRes = 0;
+            Account account = AccountMapper.GetAccountByID(requested.AccountID);
 
-            //linq to check accout date res
-            var people = from dbReservation in context.Reservation
-                         where res.StartDate >= dbReservation.StartDate 
-                         && res.EndDate <= dbReservation.EndDate 
-                         && res.AccountID == dbReservation.AccountID
-                         select dbReservation;
-
-            //increment per res
-            foreach (Reservation p in people)
-                numRes++;
+            var reservations = from existing in account.Reservations
+                               where existing.EndDate >= requested.StartDate
+                                    || existing.StartDate <= requested.EndDate
+                               select existing;
 
             //if one conflicting res exists
-            if (numRes == 0)
-                return true;
-            else
-                return false;
+            return reservations.Count() == 0;
         }
 
         /// <summary>
@@ -69,31 +59,26 @@ namespace ServerProgram.Mappers
         /// <param name="res"></param>
         public static bool CheckRoomAvailability(Reservation res)
         {
-            List<Reservation> list =  ReadResearvationsByRoom(res.RoomID);
-
+            DormRoom room = DormRoomMapper.GetRoomByID(res.RoomID);
             // loop each date starting for res.startdate
-            DateTime date = res.StartDate;
-            while(date <= res.EndDate)
+            for (DateTime date = res.StartDate; date <= res.EndDate; date = date.AddDays(1))
             {
-                // check how many reservations exist in the date
-                int numRes = CheckReservationsByDateAndRoom(res.RoomID ,date);
+                var existing = from reservation in room.Reservations
+                               where reservation.StartDate <= date
+                                    && reservation.EndDate >= date
+                               select reservation;
 
-                // If capacity is bigger than the number of reservations 
-                //for the specific date
-                int cap = DormRoomMapper.GetRoomCapacityByID(res.RoomID);
-                if (cap > numRes)
-                {
-                    date = date.AddDays(1);
-                    continue;
-                }
-                else
+                //foreach (Reservation reservation in existing)
+                //    Console.WriteLine($"Starts: {reservation.StartDate} " +
+                //        $"Ends: {reservation.EndDate} " +
+                //        $"Checking: {date} " +
+                //        $"StartDate < date && EndDate > date returns: {reservation.StartDate < date && reservation.EndDate > date}")
+
+                // check how many reservations exist in the date
+                if (existing.Count() >= room.Capacity)
                     return false;
             }
-
-            if (date == res.EndDate.AddDays(1))
-                return true;
-            else
-                return false;
+            return true;
         }
 
         /// <summary>
@@ -102,13 +87,8 @@ namespace ServerProgram.Mappers
         /// <param name="res"></param>
         public static bool ValidateRoomReservation(Reservation res)
         {
-            bool acc = CheckAccountResDates(res);
-            bool cap = CheckRoomAvailability(res);
-
-            if (acc == true && cap == true)
-                return true;
-            else
-                return false;
+            return CheckAccountResDates(res)
+                && CheckRoomAvailability(res);
         }
 
         /// <summary>

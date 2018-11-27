@@ -31,9 +31,9 @@ namespace ServerProgram
                     if (account == null)
                         MessageBox.Show("Invalid username or password", "Login Error");
                     else if (account.StudentID == null)
-                        Application.Run(new AdminForm());
+                        Application.Run(new AdminForm(account.AccountID));
                     else
-                        Application.Run(new StudentsReservations());
+                        Application.Run(new StudentsReservations(account.AccountID));
                 }
                 else // result == DialogResult.Ignore
                 {
@@ -47,7 +47,7 @@ namespace ServerProgram
                             Password = login.Password,
                             StudentID = id
                         });
-                        Application.Run(new StudentsReservations());
+                        login.ClearInfo(true);
                     }
                     else
                         MessageBox.Show("Invalid student ID or username already taken", "Login Error");
