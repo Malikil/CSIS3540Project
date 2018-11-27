@@ -65,7 +65,6 @@ namespace ServerProgram
                 .HasMany(e => e.Accounts)
                 .WithRequired(e => e.Student)
                 .WillCascadeOnDelete(true);
-
         }
     }
 }
