@@ -111,6 +111,58 @@ namespace ServerProgram.Mappers
                 return false;
         }
 
+        /// <summary>
+        /// Returns a list of Students that have made reservations for a DormRoom
+        /// </summary>
+        /// <param name="roomid"></param>
+        public static List<Student> ReadStudentsByRoom(int roomid)
+        {
+            var st = (from res in context.Reservation
+                      join a in context.Account on res.AccountID equals a.AccountID
+                      join s in context.Student on a.StudentID equals s.StudentID
+                      where a.StudentID == s.StudentID
+                      select new 
+                      {
+                          StudentID = s.StudentID,
+                          Name = s.Name.ToString(),
+                      }).Distinct();
+            List<Student> students = new List<Student>();
+            foreach(var s in st)
+            {
+                Student stu = new Student() {StudentID = s.StudentID, Name = s.Name };
+                students.Add(stu);
+                Console.WriteLine($"{s.StudentID} {s.Name}");
+            }
+
+            return students;
+        }
+
+        /// <summary>
+        /// Returns a list of Students that have made reservations for a DormRoom
+        /// </summary>
+        /// <param name="roomid"></param>
+        public static List<string> WrongReadStudentsByRoom(int roomid)
+        {
+            var st = (from res in context.Reservation
+                              join a in context.Account on res.AccountID equals a.AccountID
+                              join s in context.Student on a.StudentID equals s.StudentID
+                              where a.StudentID == s.StudentID
+                              select new
+                              {
+                                  Id = a.StudentID.ToString(),
+                                  Name = s.Name.ToString(),
+                                  Start = res.StartDate.ToString(),
+                                  End = res.EndDate.ToString()
+                              });
+            List<string> students = new List<string>();
+            foreach (var s in st)
+            {
+                students.Add(s.ToString());
+            }
+
+            return students.ToList();
+        }
+
 
         /// <summary>
         /// Check the number of reservations per room by a specific day 

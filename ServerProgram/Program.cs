@@ -15,6 +15,7 @@ namespace ServerProgram
     {
         static void Main()
         {
+            ReservationMapper.ReadStudentsByRoom(4);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LoginForm login = new LoginForm();

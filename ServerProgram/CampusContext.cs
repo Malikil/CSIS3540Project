@@ -66,5 +66,6 @@ namespace ServerProgram
                 .WithRequired(e => e.Student)
                 .WillCascadeOnDelete(true);
         }
+
     }
 }
