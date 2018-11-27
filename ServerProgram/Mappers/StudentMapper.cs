@@ -31,5 +31,18 @@ namespace ServerProgram.Mappers
             Student student = context.Student.Where(s => s.StudentID == ID).FirstOrDefault();
             return student;
         }
+
+        public static void DeleteStudentByID(int studentid)
+        {
+            var students = from s in context.Student
+                        where s.StudentID == studentid
+                        select s;
+            Student student = students.FirstOrDefault();
+            if (student != null)
+            {
+                context.Student.Remove(student);
+                context.SaveChanges();
+            }
+        }
     }
 }

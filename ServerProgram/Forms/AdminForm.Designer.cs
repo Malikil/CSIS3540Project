@@ -54,41 +54,32 @@
             this.roomNumbertextBox = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.studentTab = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.CloseSecondFormButtonsClicked = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.DeleteStudentTextBox = new System.Windows.Forms.TextBox();
+            this.btnDeleteStudent = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.studentsIdTextBoxSearch = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.searchStudentBtn = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
+            this.StudentID = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.textBoxRoom = new System.Windows.Forms.TextBox();
-            this.textBoxEmail = new System.Windows.Forms.TextBox();
-            this.textBoxPhone = new System.Windows.Forms.TextBox();
-            this.textBoxAge = new System.Windows.Forms.TextBox();
-            this.textBoxLastname = new System.Windows.Forms.TextBox();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.textBoxStudentID = new System.Windows.Forms.TextBox();
+            this.textBoxStudentName = new System.Windows.Forms.TextBox();
+            this.InsertStudentButtonClicked = new System.Windows.Forms.Button();
+            this.RoomsSecondGridView = new System.Windows.Forms.DataGridView();
+            this.StudentsSecondGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.studentsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomsGridView)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.roomTab.SuspendLayout();
             this.studentTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RoomsSecondGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StudentsSecondGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // deleteButton
@@ -365,34 +356,25 @@
             // 
             // studentTab
             // 
-            this.studentTab.Controls.Add(this.button2);
             this.studentTab.Controls.Add(this.label7);
             this.studentTab.Controls.Add(this.label10);
             this.studentTab.Controls.Add(this.label12);
-            this.studentTab.Controls.Add(this.button3);
+            this.studentTab.Controls.Add(this.CloseSecondFormButtonsClicked);
             this.studentTab.Controls.Add(this.label13);
-            this.studentTab.Controls.Add(this.textBox1);
-            this.studentTab.Controls.Add(this.btnDelete);
+            this.studentTab.Controls.Add(this.DeleteStudentTextBox);
+            this.studentTab.Controls.Add(this.btnDeleteStudent);
             this.studentTab.Controls.Add(this.label15);
             this.studentTab.Controls.Add(this.studentsIdTextBoxSearch);
-            this.studentTab.Controls.Add(this.button4);
+            this.studentTab.Controls.Add(this.searchStudentBtn);
             this.studentTab.Controls.Add(this.label16);
             this.studentTab.Controls.Add(this.label17);
-            this.studentTab.Controls.Add(this.label18);
-            this.studentTab.Controls.Add(this.label19);
-            this.studentTab.Controls.Add(this.label20);
-            this.studentTab.Controls.Add(this.label21);
-            this.studentTab.Controls.Add(this.label22);
+            this.studentTab.Controls.Add(this.StudentID);
             this.studentTab.Controls.Add(this.label23);
-            this.studentTab.Controls.Add(this.textBoxRoom);
-            this.studentTab.Controls.Add(this.textBoxEmail);
-            this.studentTab.Controls.Add(this.textBoxPhone);
-            this.studentTab.Controls.Add(this.textBoxAge);
-            this.studentTab.Controls.Add(this.textBoxLastname);
-            this.studentTab.Controls.Add(this.textBoxName);
-            this.studentTab.Controls.Add(this.button5);
-            this.studentTab.Controls.Add(this.dataGridView1);
-            this.studentTab.Controls.Add(this.dataGridView2);
+            this.studentTab.Controls.Add(this.textBoxStudentID);
+            this.studentTab.Controls.Add(this.textBoxStudentName);
+            this.studentTab.Controls.Add(this.InsertStudentButtonClicked);
+            this.studentTab.Controls.Add(this.RoomsSecondGridView);
+            this.studentTab.Controls.Add(this.StudentsSecondGridView);
             this.studentTab.Location = new System.Drawing.Point(4, 29);
             this.studentTab.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studentTab.Name = "studentTab";
@@ -401,23 +383,13 @@
             this.studentTab.TabIndex = 1;
             this.studentTab.Text = "Students";
             this.studentTab.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(1287, 745);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 35);
-            this.button2.TabIndex = 87;
-            this.button2.Text = "LOAD";
-            this.button2.UseVisualStyleBackColor = true;
+            this.studentTab.Click += new System.EventHandler(this.studentTab_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(1385, 595);
+            this.label7.Location = new System.Drawing.Point(1385, 486);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(191, 20);
@@ -428,7 +400,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(1376, 466);
+            this.label10.Location = new System.Drawing.Point(1376, 357);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(217, 20);
@@ -446,49 +418,51 @@
             this.label12.TabIndex = 84;
             this.label12.Text = "ROOM IMFORMATION";
             // 
-            // button3
+            // CloseSecondFormButtonsClicked
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(1468, 745);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(112, 35);
-            this.button3.TabIndex = 83;
-            this.button3.Text = "EXIT";
-            this.button3.UseVisualStyleBackColor = true;
+            this.CloseSecondFormButtonsClicked.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseSecondFormButtonsClicked.Location = new System.Drawing.Point(1401, 708);
+            this.CloseSecondFormButtonsClicked.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CloseSecondFormButtonsClicked.Name = "CloseSecondFormButtonsClicked";
+            this.CloseSecondFormButtonsClicked.Size = new System.Drawing.Size(112, 35);
+            this.CloseSecondFormButtonsClicked.TabIndex = 83;
+            this.CloseSecondFormButtonsClicked.Text = "EXIT";
+            this.CloseSecondFormButtonsClicked.UseVisualStyleBackColor = true;
+            this.CloseSecondFormButtonsClicked.Click += new System.EventHandler(this.CloseSecondFormButtonsClicked_Click);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1190, 658);
+            this.label13.Location = new System.Drawing.Point(1190, 549);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(183, 20);
             this.label13.TabIndex = 82;
             this.label13.Text = "Delete a Student record:";
             // 
-            // textBox1
+            // DeleteStudentTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(1389, 651);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(148, 26);
-            this.textBox1.TabIndex = 81;
+            this.DeleteStudentTextBox.Location = new System.Drawing.Point(1389, 542);
+            this.DeleteStudentTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DeleteStudentTextBox.Name = "DeleteStudentTextBox";
+            this.DeleteStudentTextBox.Size = new System.Drawing.Size(148, 26);
+            this.DeleteStudentTextBox.TabIndex = 81;
             // 
-            // btnDelete
+            // btnDeleteStudent
             // 
-            this.btnDelete.Location = new System.Drawing.Point(1560, 650);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(112, 35);
-            this.btnDelete.TabIndex = 80;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDeleteStudent.Location = new System.Drawing.Point(1560, 541);
+            this.btnDeleteStudent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnDeleteStudent.Name = "btnDeleteStudent";
+            this.btnDeleteStudent.Size = new System.Drawing.Size(112, 35);
+            this.btnDeleteStudent.TabIndex = 80;
+            this.btnDeleteStudent.Text = "Delete";
+            this.btnDeleteStudent.UseVisualStyleBackColor = true;
+            this.btnDeleteStudent.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(1120, 535);
+            this.label15.Location = new System.Drawing.Point(1120, 426);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(268, 20);
@@ -497,21 +471,21 @@
             // 
             // studentsIdTextBoxSearch
             // 
-            this.studentsIdTextBoxSearch.Location = new System.Drawing.Point(1401, 529);
+            this.studentsIdTextBoxSearch.Location = new System.Drawing.Point(1401, 420);
             this.studentsIdTextBoxSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.studentsIdTextBoxSearch.Name = "studentsIdTextBoxSearch";
             this.studentsIdTextBoxSearch.Size = new System.Drawing.Size(148, 26);
             this.studentsIdTextBoxSearch.TabIndex = 78;
             // 
-            // button4
+            // searchStudentBtn
             // 
-            this.button4.Location = new System.Drawing.Point(1572, 528);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(112, 35);
-            this.button4.TabIndex = 77;
-            this.button4.Text = "Search";
-            this.button4.UseVisualStyleBackColor = true;
+            this.searchStudentBtn.Location = new System.Drawing.Point(1572, 419);
+            this.searchStudentBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchStudentBtn.Name = "searchStudentBtn";
+            this.searchStudentBtn.Size = new System.Drawing.Size(112, 35);
+            this.searchStudentBtn.TabIndex = 77;
+            this.searchStudentBtn.Text = "Search";
+            this.searchStudentBtn.UseVisualStyleBackColor = true;
             // 
             // label16
             // 
@@ -535,56 +509,15 @@
             this.label17.TabIndex = 75;
             this.label17.Text = "INSERT A NEW STUDENT";
             // 
-            // label18
+            // StudentID
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1461, 291);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(56, 20);
-            this.label18.TabIndex = 74;
-            this.label18.Text = "Room:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(1465, 235);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(52, 20);
-            this.label19.TabIndex = 73;
-            this.label19.Text = "Email:";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(1456, 178);
-            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(59, 20);
-            this.label20.TabIndex = 72;
-            this.label20.Text = "Phone:";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(1203, 292);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(42, 20);
-            this.label21.TabIndex = 71;
-            this.label21.Tag = "Age";
-            this.label21.Text = "Age:";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(1159, 235);
-            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(90, 20);
-            this.label22.TabIndex = 70;
-            this.label22.Text = "Last Name:";
+            this.StudentID.AutoSize = true;
+            this.StudentID.Location = new System.Drawing.Point(1429, 175);
+            this.StudentID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.StudentID.Name = "StudentID";
+            this.StudentID.Size = new System.Drawing.Size(87, 20);
+            this.StudentID.TabIndex = 72;
+            this.StudentID.Text = "StudentID:";
             // 
             // label23
             // 
@@ -596,81 +529,50 @@
             this.label23.TabIndex = 69;
             this.label23.Text = "Name:";
             // 
-            // textBoxRoom
+            // textBoxStudentID
             // 
-            this.textBoxRoom.Location = new System.Drawing.Point(1521, 286);
-            this.textBoxRoom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBoxRoom.Name = "textBoxRoom";
-            this.textBoxRoom.Size = new System.Drawing.Size(148, 26);
-            this.textBoxRoom.TabIndex = 68;
+            this.textBoxStudentID.Location = new System.Drawing.Point(1521, 172);
+            this.textBoxStudentID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxStudentID.Name = "textBoxStudentID";
+            this.textBoxStudentID.Size = new System.Drawing.Size(148, 26);
+            this.textBoxStudentID.TabIndex = 66;
             // 
-            // textBoxEmail
+            // textBoxStudentName
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(1521, 231);
-            this.textBoxEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(148, 26);
-            this.textBoxEmail.TabIndex = 67;
+            this.textBoxStudentName.Location = new System.Drawing.Point(1251, 172);
+            this.textBoxStudentName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxStudentName.Name = "textBoxStudentName";
+            this.textBoxStudentName.Size = new System.Drawing.Size(148, 26);
+            this.textBoxStudentName.TabIndex = 63;
             // 
-            // textBoxPhone
+            // InsertStudentButtonClicked
             // 
-            this.textBoxPhone.Location = new System.Drawing.Point(1521, 172);
-            this.textBoxPhone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBoxPhone.Name = "textBoxPhone";
-            this.textBoxPhone.Size = new System.Drawing.Size(148, 26);
-            this.textBoxPhone.TabIndex = 66;
+            this.InsertStudentButtonClicked.Location = new System.Drawing.Point(1380, 263);
+            this.InsertStudentButtonClicked.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.InsertStudentButtonClicked.Name = "InsertStudentButtonClicked";
+            this.InsertStudentButtonClicked.Size = new System.Drawing.Size(112, 35);
+            this.InsertStudentButtonClicked.TabIndex = 62;
+            this.InsertStudentButtonClicked.Text = "Insert";
+            this.InsertStudentButtonClicked.UseVisualStyleBackColor = true;
+            this.InsertStudentButtonClicked.Click += new System.EventHandler(this.InsertStudentButtonClicked_Click);
             // 
-            // textBoxAge
+            // RoomsSecondGridView
             // 
-            this.textBoxAge.Location = new System.Drawing.Point(1251, 286);
-            this.textBoxAge.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBoxAge.Name = "textBoxAge";
-            this.textBoxAge.Size = new System.Drawing.Size(148, 26);
-            this.textBoxAge.TabIndex = 65;
+            this.RoomsSecondGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.RoomsSecondGridView.Location = new System.Drawing.Point(35, 535);
+            this.RoomsSecondGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.RoomsSecondGridView.Name = "RoomsSecondGridView";
+            this.RoomsSecondGridView.Size = new System.Drawing.Size(1044, 269);
+            this.RoomsSecondGridView.TabIndex = 61;
             // 
-            // textBoxLastname
+            // StudentsSecondGridView
             // 
-            this.textBoxLastname.Location = new System.Drawing.Point(1251, 231);
-            this.textBoxLastname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBoxLastname.Name = "textBoxLastname";
-            this.textBoxLastname.Size = new System.Drawing.Size(148, 26);
-            this.textBoxLastname.TabIndex = 64;
-            // 
-            // textBoxName
-            // 
-            this.textBoxName.Location = new System.Drawing.Point(1251, 172);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(148, 26);
-            this.textBoxName.TabIndex = 63;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(1402, 360);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(112, 35);
-            this.button5.TabIndex = 62;
-            this.button5.Text = "Insert";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(35, 535);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1044, 269);
-            this.dataGridView1.TabIndex = 61;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(35, 95);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(1044, 368);
-            this.dataGridView2.TabIndex = 60;
+            this.StudentsSecondGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.StudentsSecondGridView.Location = new System.Drawing.Point(35, 95);
+            this.StudentsSecondGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.StudentsSecondGridView.Name = "StudentsSecondGridView";
+            this.StudentsSecondGridView.Size = new System.Drawing.Size(1044, 368);
+            this.StudentsSecondGridView.TabIndex = 60;
             // 
             // AdminForm
             // 
@@ -689,8 +591,8 @@
             this.roomTab.PerformLayout();
             this.studentTab.ResumeLayout(false);
             this.studentTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RoomsSecondGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StudentsSecondGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -721,34 +623,25 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage roomTab;
         private System.Windows.Forms.TabPage studentTab;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button CloseSecondFormButtonsClicked;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.TextBox DeleteStudentTextBox;
+        private System.Windows.Forms.Button btnDeleteStudent;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox studentsIdTextBoxSearch;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button searchStudentBtn;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label StudentID;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox textBoxRoom;
-        private System.Windows.Forms.TextBox textBoxEmail;
-        private System.Windows.Forms.TextBox textBoxPhone;
-        private System.Windows.Forms.TextBox textBoxAge;
-        private System.Windows.Forms.TextBox textBoxLastname;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.TextBox textBoxStudentID;
+        private System.Windows.Forms.TextBox textBoxStudentName;
+        private System.Windows.Forms.Button InsertStudentButtonClicked;
+        private System.Windows.Forms.DataGridView RoomsSecondGridView;
+        private System.Windows.Forms.DataGridView StudentsSecondGridView;
         private System.Windows.Forms.TextBox roomNumbertextBox;
         private System.Windows.Forms.Label label24;
     }

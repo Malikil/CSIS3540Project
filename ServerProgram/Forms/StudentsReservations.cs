@@ -31,5 +31,28 @@ namespace ServerProgram.Forms
             List<DormRoom> rooms = DormRoomMapper.GetAvailableRoomsByDate(dateTimePicker1.Value, dateTimePicker2.Value);
             dataGridView1.DataSource = rooms;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Reservation newReservation = new Reservation()
+            {
+                RoomID = int.Parse(textBoxRoomID.Text),
+                AccountID = int.Parse(textBoxAccountID.Text),
+                StartDate = dateTimePicker1.Value,
+                EndDate = dateTimePicker2.Value
+
+            };
+
+            bool validation = ReservationMapper.ValidateRoomReservation(newReservation);
+            if (validation)
+            {
+                ReservationMapper.CreateReservation(newReservation);
+            }
+            else
+            {
+                ReservationMapper.CreateReservation(newReservation);
+                MessageBox.Show("Try again");
+            }
+        }
     }
 }

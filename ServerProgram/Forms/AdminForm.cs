@@ -27,6 +27,7 @@ namespace ServerProgram.Forms
         {
             UpdateRoomList(DormRoomMapper.GetAllRooms());
             UpdateStudentsFromRoomList(StudentMapper.ReadAllStudents());
+            UpdateStudentsList(StudentMapper.ReadAllStudents());
         }
 
         private void RoomSelectedFromList(object sender, DataGridViewCellEventArgs e)
@@ -55,6 +56,19 @@ namespace ServerProgram.Forms
         private void UpdateStudentsFromRoomList(List<Student> list)
         {
             studentsGridView.DataSource = (from student in list
+                                           let account = student.Accounts.FirstOrDefault()
+                                           select new
+                                           {
+                                               student.StudentID,
+                                               student.Name,
+                                               account?.Reservations.FirstOrDefault()?.StartDate,
+                                               account?.Reservations.FirstOrDefault()?.EndDate
+                                           }).ToList();
+        }
+
+        private void UpdateStudentsList(List<Student> list)
+        {
+            StudentsSecondGridView.DataSource = (from student in list
                                            let account = student.Accounts.FirstOrDefault()
                                            select new
                                            {
@@ -98,6 +112,36 @@ namespace ServerProgram.Forms
                 
             //UpdateStudentsFromRoomList(StudentMapper.ReadAllStudents(ReservationMapper.GetStudentByRoom(roomid)));
 
+        }
+
+        private void studentTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CloseSecondFormButtonsClicked_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void InsertStudentButtonClicked_Click(object sender, EventArgs e)
+        {
+            Student newStudent = new Student()
+            {
+                Name = textBoxStudentName.Text,
+                StudentID = int.Parse(textBoxStudentID.Text)               
+            };
+
+            StudentMapper.CreateStudent(newStudent);
+            UpdateStudentsList(StudentMapper.ReadAllStudents());
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(DeleteStudentTextBox.Text, out int studentid))
+                StudentMapper.DeleteStudentByID(studentid);
+            UpdateStudentsList(StudentMapper.ReadAllStudents());
         }
     }
 }
