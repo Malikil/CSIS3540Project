@@ -18,215 +18,82 @@ namespace ServerProgram.Forms
 {
     public partial class AdminForm : Form
     {
-        List<Student> studentsList = null;
-        private List<DormRoom> roomList = null;
-        DataTable studentsTable = new DataTable();
-        DataTable roomsTable = new DataTable();
-        DataView studentsView, roomsView;
-        int lastRoomID, lastRoomNumber;
-        public int roomx;
-
         public AdminForm()
         {
             InitializeComponent();
-
-            studentsList = new List<Student>
-            {
-                new Student{StudentID = 1, Name="Jhon"},
-                new Student{StudentID = 2, Name="Diana"},
-                new Student{StudentID = 3, Name="Jorge"},
-                new Student{StudentID = 4, Name="Sammy"},
-                new Student{StudentID = 5, Name="Rachel"},
-                new Student{StudentID = 6, Name="Sharyn"},
-                new Student{StudentID = 7, Name="Roger"}
-            };
-            roomList = new List<DormRoom>(DormRoomMapper.ReadAllRooms());
-            lastRoomID = roomList.Last().RoomID;
-            label25.Text = lastRoomID.ToString();
-
-            //roomList = new List<DormRoom>
-            //{
-            //    new DormRoom{RoomID = 101, Size=1},
-            //    new DormRoom{RoomID = 102, Size=2},
-            //    new DormRoom{RoomID = 201, Size=1},
-            //    new DormRoom{RoomID = 202, Size=2},
-            //    new DormRoom{RoomID = 301, Size=1},
-            //    new DormRoom{RoomID = 302, Size=2}
-
-            //};
-
-            CreateDataTable();
         }
 
-        private void roomsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void LoadRoomsAndStudents(object sender, EventArgs e)
+        {
+            UpdateRoomList(DormRoomMapper.GetAllRooms());
+        }
+
+        private void RoomSelectedFromList(object sender, DataGridViewCellEventArgs e)
         {
             int roomx;
             int index = e.RowIndex;
             DataGridViewRow selectedRow = roomsGridView.Rows[index];
             roomx = int.Parse(selectedRow.Cells[0].Value.ToString());
             label1.Text = roomx.ToString();
-            StudentsDataView(roomx);
-
-
+            
         }
-        public void CreateDataTable()
+
+        private void UpdateRoomList(List<DormRoom> list)
         {
-            //var studentIdColumn = new DataColumn("StudentID", typeof(int))
-            //{
-            //    Caption = "Student Id",
-            //    ReadOnly = true,
-            //    AllowDBNull = false,
-            //    Unique = true,
-            //    AutoIncrement = true,
-            //    AutoIncrementSeed = 1,
-            //    AutoIncrementStep = 1,
-            //};
-
-            //var studentNameColumn = new DataColumn("Name", typeof(string));
-
-            //studentsTable.Columns.AddRange
-            //    (new[] { studentIdColumn, studentNameColumn });
-
-            //foreach (var l in studentsList)
-            //{
-            //    var newRow = studentsTable.NewRow();
-            //    newRow[0] = l.StudentID;
-            //    newRow[1] = l.Name;
-            //    studentsTable.Rows.Add(newRow);
-
-            //}
-            //studentsGridView.DataSource = studentsTable;
-
-
-            var roomIdColumn = new DataColumn("RoomID", typeof(int))
-            //{
-            //    Caption = "Romm Id",
-            //    ReadOnly = true,
-            //    AllowDBNull = false,
-            //    Unique = true,
-            //    AutoIncrement = true,
-            //    AutoIncrementSeed = 1,
-            //    AutoIncrementStep = 1,
-            //}
-            ;
-
-            var roomSizeColumn = new DataColumn("Size", typeof(int));
-            var roomCapacityColumn = new DataColumn("Capacity", typeof(int));
-            var roomFloorIdColumn = new DataColumn("FloorID", typeof(int));
-            var roomNumberColumn = new DataColumn("RoomNumber", typeof(int));
-
-            roomsTable.Columns.AddRange
-                (new[] { roomIdColumn, roomSizeColumn, roomCapacityColumn, roomFloorIdColumn, roomNumberColumn });
-
-            foreach (var l in roomList)
-            {
-                var newRow = roomsTable.NewRow();
-                newRow[0] = l.RoomID;
-                newRow[1] = l.Size;
-                newRow[2] = l.Capacity;
-                newRow[3] = l.FloorID;
-                newRow[4] = l.RoomNumber;
-                roomsTable.Rows.Add(newRow);
-
-            }
-            roomsGridView.DataSource = roomsTable;
+            roomsGridView.DataSource = (from room in list
+                                        select new
+                                        {
+                                            room.RoomID,
+                                            room.Size,
+                                            room.Capacity,
+                                            room.Floor.FloorNum,
+                                            room.RoomNumber
+                                        }).ToList();
         }
 
-
-        private void StudentsDataView(int room)
+        private void UpdateStudentsFromRoomList(List<Student> list)
         {
-            //set the table that is used to construct this view
-            studentsView = new DataView(studentsTable);
-
-            //now configure the views using a filter
-            studentsView.RowFilter = $"Room = {room} ";
-
-            //bind the new grid
-            studentsGridView.DataSource = studentsView;
+            studentsGridView.DataSource = (from student in list
+                                           let account = student.Accounts.FirstOrDefault()
+                                           select new
+                                           {
+                                               student.StudentID,
+                                               student.Name,
+                                               account?.Reservations.FirstOrDefault()?.StartDate,
+                                               account?.Reservations.FirstOrDefault()?.EndDate
+                                           }).ToList();
         }
 
-        private void RoomsDataView(int room)
-        {
-            //set the table that is used to construct this view
-            roomsView = new DataView(roomsTable);
-
-            //now configure the views using a filter
-            roomsView.RowFilter = $"RoomID = {room} ";
-
-            //bind the new grid
-            roomsGridView.DataSource = roomsView;
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
+        private void CloseFormButtonsClicked(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void buttonLoad_Click(object sender, EventArgs e)
+        private void InsertRoomButtonClicked(object sender, EventArgs e)
         {
-            foreach (var l in studentsList)
+            DormRoom newRoom = new DormRoom
             {
-                studentsGridView.DataSource = studentsTable;
-            }
-            //foreach (var l in roomList)
-            //{
-            //    roomsGridView.DataSource = roomsTable;
-            //}
-        }
-
-        private void buttonInsert_Click_1(object sender, EventArgs e)
-        {
-            //roomList = new List<DormRoom>(DormRoomMapper.ReadAllRooms());
-            //CreateDataTable();
-
-            
-            
-            DormRoom newRoom = new DormRoom();
-            //roomList.Add(newRoom.RoomID)
-            newRoom.RoomID = lastRoomID + 1;
-            newRoom.Size = int.Parse(RoomSizeTextBox.Text);
-            newRoom.Capacity = int.Parse(roomCapacityTextBox.Text);
-            newRoom.FloorID = int.Parse(FloorIDTextBox.Text);
-            newRoom.RoomNumber = int.Parse(roomNumbertextBox.Text);
+                Size = int.Parse(RoomSizeTextBox.Text),
+                Capacity = int.Parse(roomCapacityTextBox.Text),
+                FloorID = int.Parse(FloorIDTextBox.Text),
+                RoomNumber = int.Parse(roomNumbertextBox.Text)
+            };
 
             DormRoomMapper.CreateDormRoom(newRoom);
-            roomsTable.AcceptChanges();
-            roomsGridView.DataSource = roomsTable;
 
+            UpdateRoomList(DormRoomMapper.GetAllRooms());
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteRoomButtonClicked(object sender, EventArgs e)
         {
-            try
-            {
-                //find the correct row to delete
-                DataRow[] rowToDelete = roomsTable.Select($"RoomID={int.Parse(textBoxDelete.Text)}");
-
-                //delete the row
-                rowToDelete[0].Delete();
-                roomsTable.AcceptChanges();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            if (int.TryParse(textBoxDelete.Text, out int roomid))
+                DormRoomMapper.DeleteDormRoomByID(roomid);
+            UpdateRoomList(DormRoomMapper.GetAllRooms());
         }
 
-        private void btnExit_Click_1(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnSearchStudent_Click_1(object sender, EventArgs e)
-        {
-            int filter = int.Parse(roomIdTextBoxSearch.Text);
-            RoomsDataView(filter);
-        }
-
-        private void buttonLoad_Click_1(object sender, EventArgs e)
+        private void SearchStudentButtonClicked(object sender, EventArgs e)
         {
             
         }
-
     }
 }
