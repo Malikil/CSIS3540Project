@@ -26,6 +26,7 @@ namespace ServerProgram.Forms
         private void LoadRoomsAndStudents(object sender, EventArgs e)
         {
             UpdateRoomList(DormRoomMapper.GetAllRooms());
+            UpdateStudentsFromRoomList(StudentMapper.ReadAllStudents());
         }
 
         private void RoomSelectedFromList(object sender, DataGridViewCellEventArgs e)
