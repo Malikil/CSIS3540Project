@@ -34,5 +34,21 @@ namespace ServerProgram.Mappers
                                      select room.Capacity;
             return capacity.FirstOrDefault();
         }
+
+        public static List<DBEntities.DormRoom> GetAvailableRoomsByDate(DateTime start, DateTime end)
+        {
+            var reserved = from room in context.DormRoom
+                           join reservation in context.Reservation
+                               on room.RoomID equals reservation.RoomID
+                               into reserves
+                           from subres in reserves.DefaultIfEmpty()
+                           where subres == null
+                                || subres.StartDate > end
+                                || subres.EndDate < start
+                           select room.Simplify();
+            foreach (DBEntities.DormRoom room in reserved)
+                Console.WriteLine($"{room.RoomID}");
+            return reserved.ToList();
+        }
     }
 }

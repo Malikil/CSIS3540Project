@@ -14,8 +14,8 @@ namespace CSIS3540Project
     class Program
     {
         //const string PIPE_SERVER_NAME = ".";
-        const string PIPE_FROM_SERVER = "ProjectServerOut";
-        const string PIPE_TO_SERVER = "ProjectServerIn";
+        public const string PIPE_FROM_SERVER = "ProjectServerOut";
+        public const string PIPE_TO_SERVER = "ProjectServerIn";
 
         [STAThread]
         static void Main()
@@ -56,17 +56,13 @@ namespace CSIS3540Project
                         {
                             if (response == "ADMIN")
                             {
-                                // Get all rooms and availability
                                 // Show admin form
-
-                                MessageBox.Show("Logged in as admin", "Logged in");
-
-                                //Application.Run(new AdminForm(toserver, fromserver));
+                                Application.Run(new AdminForm());
                             }
                             else if (response == "STUDENT")
                             {
                                 // Show student form
-                                MessageBox.Show("Logged in as student", "Logged in");
+                                Application.Run(new StudentsReservations());
                             }
                             else
                             {
@@ -97,7 +93,7 @@ namespace CSIS3540Project
 
                         if (response == "STUDENT") // Account created
                         {
-                            MessageBox.Show("Logged in as student");
+                            Application.Run(new StudentsReservations());
                         }
                         else // Account not created
                         {

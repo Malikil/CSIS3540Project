@@ -39,7 +39,10 @@ namespace ServerProgram
             for (int i = 0; i < args.Length; i++)
                 args[i] = args[i].Trim();
 
-            List<DBEntities.DormRoom> rooms = new List<DBEntities.DormRoom>();
+            DateTime start = DateTime.Parse(args[0]);
+            DateTime end = DateTime.Parse(args[1]);
+
+            List<DBEntities.DormRoom> rooms = DormRoomMapper.GetAvailableRoomsByDate(start, end);
             XmlSerializer ser = new XmlSerializer(typeof(List<DBEntities.DormRoom>));
             using (StreamWriter _out = new StreamWriter(outstream))
             {
@@ -58,9 +61,9 @@ namespace ServerProgram
             else
             {
                 // Make sure the student exists
-                if (int.TryParse(args[3], out int id) &&
+                if (int.TryParse(args[2], out int id) &&
                     StudentMapper.ReadStudentByID(id) != null &&
-                    AccountMapper.ReadAccountByUserPass(args[1], args[2]) == null)
+                    AccountMapper.ReadAccountByUserPass(args[0], args[1]) == null)
                 {
                     account = new Account()
                     {
