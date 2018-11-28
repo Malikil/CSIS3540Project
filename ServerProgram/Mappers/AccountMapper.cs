@@ -23,6 +23,13 @@ namespace ServerProgram.Mappers
             return context.Account.ToList();
         }
 
+        public static Account GetAccountByID(int id)
+        {
+            return (from account in context.Account
+                    where account.AccountID == id
+                    select account).FirstOrDefault();
+        }
+
         public static Account ReadAccountByUserPass(string username, string password)
         {
             var acc = from account in context.Account

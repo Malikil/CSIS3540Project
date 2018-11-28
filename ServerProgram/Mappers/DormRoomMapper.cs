@@ -18,7 +18,27 @@ namespace ServerProgram.Mappers
             context.SaveChanges();
         }
 
-        public static List<DormRoom> ReadAllRooms()
+        public static DormRoom GetRoomByID(int id)
+        {
+            return (from room in context.DormRoom
+                    where room.RoomID == id
+                    select room).FirstOrDefault();
+        }
+
+        public static void DeleteDormRoomByID(int roomid)
+        {
+            var rooms = from r in context.DormRoom
+                        where r.RoomID == roomid
+                        select r;
+            DormRoom room = rooms.FirstOrDefault();
+            if (room != null)
+            {
+                context.DormRoom.Remove(room);
+                context.SaveChanges();
+            }
+        }
+
+        public static List<DormRoom> GetAllRooms()
         {
             return context.DormRoom.ToList();
         }
@@ -35,7 +55,7 @@ namespace ServerProgram.Mappers
             return capacity.FirstOrDefault();
         }
 
-        public static List<DBEntities.DormRoom> GetAvailableRoomsByDate(DateTime start, DateTime end)
+        public static List<DormRoom> GetAvailableRoomsByDate(DateTime start, DateTime end)
         {
             var reserved = from room in context.DormRoom
                            join reservation in context.Reservation
@@ -45,9 +65,7 @@ namespace ServerProgram.Mappers
                            where subres == null
                                 || subres.StartDate > end
                                 || subres.EndDate < start
-                           select room.Simplify();
-            foreach (DBEntities.DormRoom room in reserved)
-                Console.WriteLine($"{room.RoomID}");
+                           select room;
             return reserved.ToList();
         }
     }
