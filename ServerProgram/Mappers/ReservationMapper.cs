@@ -103,15 +103,15 @@ namespace ServerProgram.Mappers
                       where a.StudentID == s.StudentID
                       select new 
                       {
-                          StudentID = s.StudentID,
-                          Name = s.Name.ToString(),
+                          s.StudentID,
+                          s.Name,
                       }).Distinct();
             List<Student> students = new List<Student>();
             foreach(var s in st)
             {
                 Student stu = new Student() {StudentID = s.StudentID, Name = s.Name };
                 students.Add(stu);
-                Console.WriteLine($"{s.StudentID} {s.Name}");
+                //Console.WriteLine($"{s.StudentID} {s.Name}");
             }
 
             return students;

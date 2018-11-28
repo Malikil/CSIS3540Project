@@ -13,9 +13,17 @@ namespace ServerProgram
 {
     class Program
     {
+        private static void Notes()
+        {
+            Console.WriteLine("Eric - Pass");
+
+            Console.WriteLine("ID: 14711");
+            Console.WriteLine("Example - Pass");
+        }
+        [STAThread]
         static void Main()
         {
-            ReservationMapper.ReadStudentsByRoom(4);
+            //Notes();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LoginForm login = new LoginForm();
